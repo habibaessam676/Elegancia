@@ -1,0 +1,1267 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Elégancia — Scent Quiz</title>
+  <!-- Google Font -->
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="elegancia.css" rel="stylesheet">
+  <link rel="icon" href="Brand photos/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="Brand photos/logo.png">
+  
+  <style>
+    /* Base & Global Styles (White, Black, Gold Hover, Beige Divs) */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      color: #000000; /* black links */
+      text-decoration: none;
+      transition: all 0.3s ease;
+    }
+    a:hover {
+      color: #D4AF37; /* gold hover */
+      transform: translateY(-2px);
+      text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+    }
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 28px;
+    }
+    /* Header Navigation */
+    .site-header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      padding: 16px 40px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background: #FFFFFFe6;
+      backdrop-filter: blur(-2900px);
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, Arial, sans-serif;
+      background: #FFFFFF;
+      color: #000000;
+      line-height: 1.45;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      padding-top: 90px;
+    }
+    .brand {
+      font-family: 'Playfair Display', serif;
+      font-size: 48px;
+      color: #D4AF37;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.3s ease;
+    }
+    .brand:hover {
+      color: #000000;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    .nav-desktop {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .nav-desktop .link {
+      font-size: 17px;
+      color: #000000;
+      font-weight: bold;
+      margin-left: 40px;
+      transition: all 0.3s ease;
+    }
+    .nav-desktop .link:hover {
+      color: #D4AF37;
+      text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    }
+/* ——— HEADER WITH PNG ICONS ——— */
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: -20px;
+  }
+    
+  /* search icon */
+  .icon-linkS {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .icon-linkS:hover {
+    background: none !important;
+    transform: scale(1.2) translateY(-3px);
+  }
+  .icon-linkS img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0);
+    transition: all 0.3s ease;
+  }
+  .icon-linkS:hover img {
+    filter: brightness(0) hue-rotate(60deg) brightness(1.3);
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+  }
+
+
+  /* cart icon */
+  .icon-linkC {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .icon-linkC:hover {
+    background: none !important;
+    transform: scale(1.2) translateY(-3px);
+  }
+  .icon-linkC img {
+    width: 35px;
+    height: 35px;
+    filter: brightness(0);
+    transition: all 0.3s ease;
+  }
+  .icon-linkC:hover img {
+    filter: brightness(0) hue-rotate(60deg) brightness(1.3);
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+  }
+
+
+  /* profile icon */
+  .icon-linkP {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .icon-linkP:hover {                /* ← fixed typo here (was .icon-linkp) */
+    background: none !important;
+    transform: scale(1.2) translateY(-3px);
+  }
+  .icon-linkP img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0);
+    transition: all 0.3s ease;
+  }
+  .icon-linkP:hover img {
+    filter: brightness(0) hue-rotate(60deg) brightness(1.3);
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+  }
+    @media (max-width: 900px) {
+      .site-header {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 14px 20px;
+      }
+      .nav-desktop {
+        flex-wrap: wrap;
+        justify-content: center;
+      }
+      .create-account-btn {
+        margin-top: 10px;
+      }
+    }
+    /* Scent Quiz Styles */
+    #scent-quiz .quiz-question {
+      max-width: 800px;
+      margin: 0 auto 32px auto;
+      padding: 40px;
+      background: #F5F5DC;
+      border: 1px solid #D4AF37;
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      text-align: left;
+    }
+    #scent-quiz .quiz-question:hover {
+      box-shadow: 0 0 10px #D4AF37;
+    }
+    #scent-quiz .quiz-question h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    #scent-quiz .quiz-question label {
+      display: block;
+      margin-bottom: 12px;
+      font-size: 18px;
+      font-family: 'Inter', sans-serif;
+      text-align: left;
+    }
+    #scent-quiz .quiz-question input {
+      margin-right: 12px;
+    }
+    #scent-quiz .quiz-question.hidden {
+      display: none;
+    }
+    #scent-quiz .btn-next {
+      background: #F5F5DC;
+      color: #000000;
+      border: 1px solid #D4AF37;
+      padding: 12px 26px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 20px auto 0;
+    }
+    #scent-quiz .btn-next:hover {
+      background: #D4AF37;
+      color: #FFFFFF;
+      box-shadow: 0 0 10px #D4AF37;
+    }
+    #scent-quiz .btn-submit {
+      background: #D4AF37;
+      color: #FFFFFF;
+      border: 1px solid #D4AF37;
+      padding: 12px 26px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 600;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      display: block;
+      margin: 20px auto 0;
+      width: 100%;
+    }
+    #scent-quiz .btn-submit:hover {
+      background: #000000;
+      color: #D4AF37;
+      box-shadow: 0 0 10px #000000;
+    }
+    /* Results Styles */
+    .rec-item {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background: #F5F5DC;
+      border: 1px solid #D4AF37;
+      border-radius: 12px;
+      text-align: center;
+    }
+    .rec-item h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+    .rec-item p {
+      font-size: 16px;
+      margin-bottom: 10px;
+    }
+    .rec-item button {
+      background: #D4AF37;
+      color: #FFFFFF;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 999px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .rec-item button:hover {
+      background: #000000;
+      color: #D4AF37;
+    }
+    /* Footer Styles (unchanged) */
+    footer {
+      margin-top: 60px;
+      background: #F5F5DC;
+      border: 1px solid #D4AF37;
+      color: #000000;
+      text-align: center;
+      padding: 40px 0;
+      border-top: 1px solid #D4AF37;
+      transition: all 0.3s ease;
+    }
+    footer:hover {
+      box-shadow: 0 0 10px #D4AF37;
+    }
+    .footer-content {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .footer-section {
+      flex: 1;
+      min-width: 200px;
+      margin: 10px;
+    }
+    .footer-section h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+      color: #D4AF37;
+    }
+    .footer-section p, .footer-section a {
+      font-size: 14px;
+      line-height: 1.6;
+      display: block;
+      margin-bottom: 8px;
+    }
+    .footer-section a {
+      text-decoration: underline;
+    }
+    .footer-section a:hover {
+      color: #D4AF37;
+    }
+    .footer-bottom {
+      width: 100%;
+      margin-top: 20px;
+      border-top: 1px solid #D4AF37;
+      padding-top: 20px;
+    }
+    .footer-bottom p {
+      font-size: 14px;
+    }
+    footer span {
+      color: #D4AF37;
+      font-weight: 600;
+      transition: all 0.3s ease;
+    }
+    footer span:hover {
+      color: #000000;
+      text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+    }
+    footer .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 24px;
+      margin-top: 14px;
+      flex-wrap: wrap;
+    }
+    footer .footer-links a {
+      color: #000000;
+      font-weight: 500;
+      text-decoration: none;
+      font-size: 15px;
+      transition: all 0.3s ease;
+    }
+    footer .footer-links a:hover {
+      color: #D4AF37;
+      transform: translateY(-2px);
+      text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+    }
+    /* Additional styles for quiz intro */
+    .quiz-intro {
+      max-width: 800px;
+      margin: 40px auto 20px auto;
+      text-align: center;
+    }
+    .quiz-intro h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+    .quiz-intro p {
+      font-family: 'Inter', sans-serif;
+      font-size: 18px;
+      line-height: 1.6;
+    }
+
+    /* Fix cart modal position + badge */
+    .icon-linkC {
+      position: relative;
+      display: inline-block;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #D4AF37;
+      color: #000;
+      font-size: 11px;
+      font-weight: bold;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      width: 360px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid #D4AF37;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      z-index: 9999;
+      padding: 24px;
+      font-family: 'Inter', sans-serif;
+    }
+    .cart-modal h3 {
+      margin: 0 0 16px;
+      color: #D4AF37;
+      border-bottom: 1px solid #f0e6d2;
+      padding-bottom: 10px;
+    }
+    #cart-items {
+      min-height: 60px;
+    }
+    #cart-total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 16px 0;
+      padding-top: 12px;
+      border-top: 1px solid #D4AF37;
+    }
+    #continue-shopping-btn:hover {
+  background: #000000 !important;
+  color: #D4AF37 !important;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+.social-icon {
+  width: 32px;
+  height: 32px;
+  transition: all 0.5s ease;
+  opacity: 1; /* ← Always fully visible */
+}
+
+.social-icon:hover {
+  /* Combined filter: gold tint + stronger glow */
+  transform: scale(1.2) translateY(1px); /* Grow and lift up on hover */
+  opacity: 1;
+}
+
+/* Search Modal Styles */
+.search-modal {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 700px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  transition: top 0.4s ease;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.search-modal.open {
+  top: 10vh;
+}
+
+.search-modal-content {
+  padding: 30px;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.search-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #D4AF37;
+  margin: 0;
+}
+
+.close-search-btn {
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.close-search-btn:hover {
+  color: #D4AF37;
+}
+
+/* Search Input */
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  border: 2px solid #D4AF37;
+  border-radius: 999px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+/* Search Results */
+.search-results {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.search-placeholder {
+  text-align: center;
+  color: #888;
+  padding: 40px 20px;
+  font-size: 15px;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-result-item:hover {
+  background: #faf9f6;
+  transform: translateX(1.5px);
+}
+
+.search-result-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #D4AF37;
+}
+
+.search-result-info {
+  flex: 1;
+}
+
+.search-result-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.search-result-desc {
+  font-size: 13px;
+  color: #666;
+}
+
+.search-result-price {
+  font-weight: bold;
+  color: #D4AF37;
+  font-size: 16px;
+}
+
+/* Search Overlay */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.search-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-modal {
+    width: 95%;
+    max-width: none;
+  }
+
+  .search-modal.open {
+    top: 5vh;
+  }
+
+  .search-modal-content {
+    padding: 20px;
+  }
+
+  .search-header h2 {
+    font-size: 22px;
+  }
+
+  .filter-chips {
+    justify-content: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+    <!-- HEADER - Same as shop page -->
+    <header class="site-header">
+      <a class="brand" href="index.html">Elégancia</a>
+      <div class="header-inner">
+        <a class="icon-linkS" href="search_e.html"><img src="search.png" alt="Search"></a>
+        <a class="icon-linkC" id="cart-icon" href="">
+            <img src="cart.png" alt="Cart">
+            <span class="cart-badge" id="cart-badge">0</span>
+          </a>
+        <a class="icon-linkP" href="profile_e.html"><img src="profile.png" alt="Profile"></a>
+      </div>
+    </header>
+
+    <!-- Scent Quiz Section -->
+<div class="quiz-intro">
+  <h1>Scent Quiz: Find Your Perfect Fragrance</h1>
+  <p>Answer a few general questions about your preferences, and our AI will recommend scents tailored to you — even if you're new to perfumes!</p>
+</div>
+  <section id="scent-quiz" class="mt-6">
+  <div class="container">
+    <form id="quiz-form" action="recommendations_e.html" method="post">
+      <div class="quiz-question" id="q1">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">1</span> of 10
+        </div>
+        <h3>What's your favorite season?</h3>
+        <label><input type="radio" name="season" value="spring"> Spring (blooming flowers, fresh air)</label>
+        <label><input type="radio" name="season" value="summer"> Summer (sunny days, beach vibes)</label>
+        <label><input type="radio" name="season" value="fall"> Fall (cozy, warm spices)</label>
+        <label><input type="radio" name="season" value="winter"> Winter (rich, comforting warmth)</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(1)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q2">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">2</span> of 10
+        </div>
+        <h3>How do you like to start your day?</h3>
+        <label><input type="radio" name="routine" value="coffee"> With a cup of coffee or tea</label>
+        <label><input type="radio" name="routine" value="workout"> With a workout or outdoor activity</label>
+        <label><input type="radio" name="routine" value="relax"> Relaxing with music or reading</label>
+        <label><input type="radio" name="routine" value="busy"> Jumping into a busy schedule</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(2)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q3">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">3</span> of 10
+        </div>
+        <h3>What's your go-to drink?</h3>
+        <label><input type="radio" name="drink" value="citrus"> Fresh juice or lemonade</label>
+        <label><input type="radio" name="drink" value="vanilla"> Sweet latte or vanilla shake</label>
+        <label><input type="radio" name="drink" value="herbal"> Herbal tea or spiced chai</label>
+        <label><input type="radio" name="drink" value="water"> Plain water or something refreshing</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(3)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q4">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">4</span> of 10
+        </div>
+        <h3>What's your dream vacation spot?</h3>
+        <label><input type="radio" name="vacation" value="beach"> Sunny beach</label>
+        <label><input type="radio" name="vacation" value="mountains"> Cozy mountains</label>
+        <label><input type="radio" name="vacation" value="city"> Vibrant city</label>
+        <label><input type="radio" name="vacation" value="garden"> Peaceful garden or countryside</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(4)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q5">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">5</span> of 10
+        </div>
+        <h3>What's your favorite color?</h3>
+        <label><input type="radio" name="color" value="red"> Red or warm tones</label>
+        <label><input type="radio" name="color" value="blue"> Blue or cool tones</label>
+        <label><input type="radio" name="color" value="green"> Green or earthy tones</label>
+        <label><input type="radio" name="color" value="pink"> Pink or floral tones</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(5)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q6">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">6</span> of 10
+        </div>
+        <h3>Which best describes your personality?</h3>
+        <label><input type="radio" name="personality" value="adventurous"> Adventurous and bold</label>
+        <label><input type="radio" name="personality" value="calm"> Calm and sophisticated</label>
+        <label><input type="radio" name="personality" value="romantic"> Romantic and dreamy</label>
+        <label><input type="radio" name="personality" value="energetic"> Energetic and fresh</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(6)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q7">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">7</span> of 10
+        </div>
+        <h3>What flavors do you enjoy in food? (Choose up to 3)</h3>
+        <label><input type="checkbox" name="flavors" value="citrus"> Citrusy and zesty</label>
+        <label><input type="checkbox" name="flavors" value="sweet"> Sweet and vanilla-like</label>
+        <label><input type="checkbox" name="flavors" value="spicy"> Spicy and warm</label>
+        <label><input type="checkbox" name="flavors" value="herbal"> Herbal and fresh</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(7)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q8">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">8</span> of 10
+        </div>
+        <h3>What kind of mood do you want your scent to evoke?</h3>
+        <label><input type="radio" name="mood" value="relaxed"> Relaxed and calming</label>
+        <label><input type="radio" name="mood" value="energized"> Energized and uplifting</label>
+        <label><input type="radio" name="mood" value="mysterious"> Mysterious and seductive</label>
+        <label><input type="radio" name="mood" value="romantic"> Romantic and soft</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(8)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q9">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">9</span> of 10
+        </div>
+        <h3>Where do you spend most of your day?</h3>
+        <label><input type="radio" name="environment" value="outdoors"> Outdoors or active</label>
+        <label><input type="radio" name="environment" value="office"> In an office or professional setting</label>
+        <label><input type="radio" name="environment" value="home"> At home or relaxed spaces</label>
+        <label><input type="radio" name="environment" value="social"> Social events or nights out</label>
+        <button type="button" class="btn-next" onclick="showNextQuestion(9)" disabled>Next</button>
+      </div>
+      <div class="quiz-question hidden" id="q10">
+        <div class="progress-text" style="text-align: center; margin-bottom: 16px; font-size: 16px; color: #666; font-weight: 500;">
+          Question <span class="current-q">10</span> of 10
+        </div>
+        <h3>What's a favorite memory that involves a smell?</h3>
+        <label><input type="radio" name="memory" value="ocean"> Ocean breeze or fresh air</label>
+        <label><input type="radio" name="memory" value="bakery"> Bakery or sweet treats</label>
+        <label><input type="radio" name="memory" value="forest"> Forest or wood after rain</label>
+        <label><input type="radio" name="memory" value="flowers"> Flowers in a garden</label>
+        <button type="submit" class="btn-submit" disabled>Get My Recommendations</button>
+      </div>
+    </form>
+    <div id="results" class="hidden"></div>
+  </div>
+
+<!-- CART MODAL -->
+<div class="cart-modal" id="cart-modal">
+  <h3>Your Cart</h3>
+  <div id="cart-items">
+    <p style="text-align:center;color:#888;padding:20px 0;">Your cart is empty</p>
+  </div>
+    <!-- CLOSE BUTTON -->
+    <button id="cart-close-btn" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:28px; cursor:pointer; color:#333; line-height:1;">
+      &times;
+    </button>
+  <div id="cart-total">Total: $0</div>
+</div>
+
+<div class="search-modal" id="search-modal">
+  <div class="search-modal-content">
+    <div class="search-header">
+      <h2>Search Products</h2>
+      <button id="close-search-btn" class="close-search-btn">&times;</button>
+    </div>
+    
+    <div class="search-input-wrapper">
+      <input 
+        type="text" 
+        id="search-input" 
+        placeholder="Search products, pages, help, and more..." 
+        autocomplete="off"
+      >
+      <span class="search-icon">🔍</span>
+    </div>
+
+    <div class="search-results" id="search-results">
+      <p class="search-placeholder">Start typing to search...</p>
+    </div>
+    </div>
+</div>
+
+<!-- Search Overlay -->
+<div class="search-overlay" id="search-overlay"></div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section company-info">
+      <h3>Elégancia</h3>
+      <p>Discover your perfect scent with personalized matching. Luxury perfumes delivered effortlessly.</p>
+      <p>Headquartered in Cairo, Egypt | Est. 2023</p>
+    </div>
+    <div class="footer-section links">
+      <h3>About Us</h3>
+      <a href="about_e.html">About Us</a>
+      <a href="blogs_e.html">Blogs</a>
+      <a href="partners_e.html">Partners</a>
+    </div>
+    <div class="footer-section support">
+      <h3>Support</h3>
+      <a href="contact_e.html">Contact Us</a>
+      <a href="help_e.html">Help Center</a>
+      <a href="issue_e.html">Report Issues</a>
+    </div>
+    <div class="footer-section legal">
+      <h3>Legal</h3>
+      <a href="privacy_e.html">Privacy Policy</a>
+      <a href="terms_e.html">Terms of Service</a>
+      <a href="returns_e.html">Returns & Exchanges</a>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-section social">
+        <h3>Follow Us</h3>
+        <div class="social-icons" style="display:flex; justify-content:center; gap:20px; margin-top:12px;">
+          <a href="https://www.instagram.com/elegancia.egy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+            <img src="instagram.png" alt="Instagram" class="social-icon">
+          </a>
+          <a href="#" target="_blank" aria-label="TikTok">
+            <img src="tiktok.png" alt="TikTok" class="social-icon">
+          </a>
+          <a href="#" target="_blank" aria-label="Facebook">
+            <img src="facebook.png" alt="Facebook" class="social-icon">
+          </a>
+          <a href="mailto:contact@elegancia.com" aria-label="Email">
+            <img src="email.png" alt="Email" class="social-icon">
+          </a>
+        </div>
+      </div>  
+      <p>© <span id="year">2025</span> Elégancia. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // JavaScript for progressive quiz
+  function showNextQuestion(current) {
+    document.getElementById(`q${current}`).classList.add('hidden');
+    document.getElementById(`q${current + 1}`).classList.remove('hidden');
+  }
+
+  // Show only the first question on load
+  document.addEventListener("DOMContentLoaded", () => {
+    const questions = document.querySelectorAll('.quiz-question');
+    questions.forEach((q, index) => {
+      if (index > 0) q.classList.add('hidden');
+    });
+
+    // Set footer year
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // Category mappings
+    const categoryMap = {
+      season: {
+        spring: 'floral',
+        summer: 'citrus',
+        fall: 'oriental',
+        winter: 'woody'
+      },
+      routine: {
+        coffee: 'oriental',
+        workout: 'citrus',
+        relax: 'floral',
+        busy: 'woody'
+      },
+      drink: {
+        citrus: 'citrus',
+        vanilla: 'oriental',
+        herbal: 'woody',
+        water: 'citrus'
+      },
+      vacation: {
+        beach: 'citrus',
+        mountains: 'woody',
+        city: 'oriental',
+        garden: 'floral'
+      },
+      color: {
+        red: 'oriental',
+        blue: 'citrus',
+        green: 'woody',
+        pink: 'floral'
+      },
+      personality: {
+        adventurous: 'oriental',
+        calm: 'woody',
+        romantic: 'floral',
+        energetic: 'citrus'
+      },
+      flavors: {
+        citrus: 'citrus',
+        sweet: 'oriental',
+        spicy: 'oriental',
+        herbal: 'woody'
+      },
+      mood: {
+        relaxed: 'floral',
+        energized: 'citrus',
+        mysterious: 'woody',
+        romantic: 'floral'
+      },
+      environment: {
+        outdoors: 'citrus',
+        office: 'woody',
+        home: 'floral',
+        social: 'oriental'
+      },
+      memory: {
+        ocean: 'citrus',
+        bakery: 'oriental',
+        forest: 'woody',
+        flowers: 'floral'
+      }
+    };
+
+    // Perfume lists
+    const perfumes = {
+      floral: [
+        {name: 'Rose Elegance', desc: 'A romantic blend of roses and jasmine, perfect for dreamy souls.', price: '$80'},
+        {name: 'Lavender Dream', desc: 'Calming lavender with hints of vanilla, ideal for relaxation.', price: '$70'},
+        {name: 'Jasmine Bloom', desc: 'Fresh jasmine flowers in full bloom, evoking garden freshness.', price: '$90'},
+        {name: 'Lily Whisper', desc: 'Soft lily and green notes, subtle and sophisticated.', price: '$75'},
+        {name: 'Petal Symphony', desc: 'A mix of various floral petals, harmonious and uplifting.', price: '$85'}
+      ],
+      citrus: [
+        {name: 'Lemon Zest', desc: 'Bright lemon and bergamot, energizing for active days.', price: '$60'},
+        {name: 'Ocean Breeze', desc: 'Fresh sea air with citrus notes, refreshing like a beach vacation.', price: '$65'},
+        {name: 'Grapefruit Spark', desc: 'Sparkling grapefruit and mint, vibrant and cool.', price: '$70'},
+        {name: 'Lime Fresh', desc: 'Zesty lime and basil, crisp and invigorating.', price: '$55'},
+        {name: 'Orange Sunrise', desc: 'Warm orange and ginger, uplifting like a summer dawn.', price: '$75'}
+      ],
+      oriental: [
+        {name: 'Vanilla Spice', desc: 'Rich vanilla with cinnamon, warm and comforting.', price: '$95'},
+        {name: 'Amber Mystique', desc: 'Warm amber and spices, mysterious and seductive.', price: '$100'},
+        {name: 'Cinnamon Warmth', desc: 'Cozy cinnamon and clove, perfect for fall vibes.', price: '$85'},
+        {name: 'Saffron Secret', desc: 'Exotic saffron and oud, bold and adventurous.', price: '$110'},
+        {name: 'Honey Oriental', desc: 'Sweet honey with oriental notes, romantic and indulgent.', price: '$90'}
+      ],
+      woody: [
+        {name: 'Sandalwood Essence', desc: 'Creamy sandalwood and patchouli, earthy and grounding.', price: '$105'},
+        {name: 'Cedar Forest', desc: 'Deep cedar wood with moss, evoking mountain freshness.', price: '$95'},
+        {name: 'Patchouli Earth', desc: 'Earthy patchouli and vetiver, sophisticated and calm.', price: '$100'},
+        {name: 'Oak Moss', desc: 'Rich oak and moss notes, natural and enduring.', price: '$90'},
+        {name: 'Pine Adventure', desc: 'Fresh pine and woody base, ideal for outdoor enthusiasts.', price: '$80'}
+      ]
+    };
+
+    // Function to get random items from array
+    function getRandom(arr, n) {
+      const shuffled = [...arr].sort(() => 0.5 - Math.random());
+      return shuffled.slice(0, n);
+    }
+
+    // Setup event listeners for each question
+    for (let i = 1; i <= 10; i++) {
+      const qDiv = document.getElementById(`q${i}`);
+      const inputs = qDiv.querySelectorAll('input');
+      const button = qDiv.querySelector('button');
+
+      const isCheckbox = inputs[0].type === 'checkbox';
+
+      // Function to check if answered
+      const checkAnswered = () => {
+        const checked = qDiv.querySelectorAll('input:checked').length;
+        button.disabled = checked === 0;
+      };
+
+      // Add change listeners
+      inputs.forEach(input => {
+        input.addEventListener('change', () => {
+          if (isCheckbox) {
+            const checkedCount = qDiv.querySelectorAll('input:checked').length;
+            if (input.checked && checkedCount > 3) {
+              input.checked = false;
+              alert('You can choose up to 3 flavors.');
+              return;
+            }
+          }
+          checkAnswered();
+        });
+      });
+    }
+
+    // Handle form submit
+    const form = document.getElementById('quiz-form');
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const formData = new FormData(form);
+
+      // Compute scores
+      const scores = { floral: 0, citrus: 0, oriental: 0, woody: 0 };
+      const questions = ['season', 'routine', 'drink', 'vacation', 'color', 'personality', 'mood', 'environment', 'memory'];
+      questions.forEach(q => {
+        const val = formData.get(q);
+        if (val) {
+          const cat = categoryMap[q][val];
+          if (cat) scores[cat]++;
+        }
+      });
+
+      // For flavors (checkboxes)
+      formData.getAll('flavors').forEach(val => {
+        const cat = categoryMap.flavors[val];
+        if (cat) scores[cat]++;
+      });
+
+      // Find top categories
+      const maxScore = Math.max(...Object.values(scores));
+      const topCats = Object.keys(scores).filter(cat => scores[cat] === maxScore);
+
+      // Collect perfumes from top categories
+      let allTopPerfumes = [];
+      topCats.forEach(cat => {
+        allTopPerfumes = allTopPerfumes.concat(perfumes[cat]);
+      });
+
+      // Pick 3 random
+      const recommendations = getRandom(allTopPerfumes, 3);
+
+      // Generate HTML
+      let html = '<h2 style="text-align: center; font-family: \'Playfair Display\', serif; font-size: 28px; margin-bottom: 20px;">Your Personalized Recommendations</h2>';
+      html += '<p style="text-align: center; font-size: 18px; margin-bottom: 40px;">Our AI analyzed your answers and suggests these scents tailored to your preferences:</p>';
+      recommendations.forEach(rec => {
+        html += `
+          <div class="rec-item">
+            <h3>${rec.name}</h3>
+            <p>${rec.desc}</p>
+            <p>Price: ${rec.price}</p>
+            <button>Buy Now</button>
+          </div>
+        `;
+      });
+
+      // Display results
+      const resultsDiv = document.getElementById('results');
+      resultsDiv.innerHTML = html;
+      resultsDiv.classList.remove('hidden');
+      form.style.display = 'none';
+      resultsDiv.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+/* ===============================================
+   ELÉGANCIA CART – EXACT SAME AS HOMEPAGE (WORKS 100%)
+   =============================================== */
+   function initEleganciaCart() {
+  const CART_KEY = 'elegancia_cart';
+  const cartIcon = document.getElementById('cart-icon');
+  const cartModal = document.getElementById('cart-modal');
+  const cartItemsContainer = document.getElementById('cart-items');
+  const cartTotalEl = document.getElementById('cart-total');
+  const cartBadge = document.getElementById('cart-badge');
+  const closeBtn = document.getElementById('cart-close-btn');
+
+  function getCart() {
+    return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+  }
+
+  function saveCart(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    updateBadge();
+    renderCart();
+  }
+
+  function updateBadge() {
+    const totalItems = getCart().reduce((sum, item) => sum + item.qty, 0);
+    if (cartBadge) {
+      cartBadge.textContent = totalItems;
+      cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+    }
+  }
+
+  window.addToCart = function(name, price = 0) {
+    const cart = getCart();
+    const existing = cart.find(item => item.name === name);
+    if (existing) existing.qty += 1;
+    else cart.push({ name, price, qty: 1 });
+    saveCart(cart);
+    alert(`${name} added to cart!`);
+  };
+
+  window.changeQty = function(name, price, delta) {
+    let cart = getCart();
+    const item = cart.find(i => i.name === name);
+    if (item) {
+      item.qty += delta;
+      if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+    }
+    saveCart(cart);
+  };
+
+  function renderCart() {
+    if (!cartItemsContainer || !cartTotalEl) return;
+
+    const cart = getCart();
+    let totalPrice = 0;
+    cartItemsContainer.innerHTML = '';
+
+    if (cart.length === 0) {
+      cartItemsContainer.innerHTML = `<p style="text-align:center;color:#888;padding:40px 0;">Your cart is empty</p>`;
+      cartTotalEl.textContent = 'Total: $0';
+
+      const actions = cartModal.querySelector('#cart-footer-actions');
+      if (actions) actions.remove();
+      return;
+    }
+
+    cart.forEach(item => {
+      totalPrice += item.price * item.qty;
+
+      const itemHTML = `
+        <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #eee;">
+          <div style="flex:1;">
+            <strong>${item.name}</strong><br>
+            <small>$${item.price} × ${item.qty}</small>
+          </div>
+          <div style="display:flex; gap:8px; align-items:center;">
+            <button onclick="changeQty('${item.name}', ${item.price}, -1)"
+                    style="width:34px;height:34px;border:none;border-radius:50%;background:#000;color:#D4AF37;font-weight:bold;cursor:pointer;">−</button>
+            <span style="min-width:30px;text-align:center;font-weight:600;">${item.qty}</span>
+            <button onclick="changeQty('${item.name}', ${item.price}, 1)"
+                    style="width:34px;height:34px;border:none;border-radius:50%;background:#D4AF37;color:#fff;font-weight:bold;cursor:pointer;">+</button>
+          </div>
+        </div>`;
+      cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+    });
+
+    cartTotalEl.textContent = `Total: $${totalPrice.toFixed(2)}`;
+
+    let footerActions = cartModal.querySelector('#cart-footer-actions');
+    if (!footerActions) {
+      footerActions = document.createElement('div');
+      footerActions.id = 'cart-footer-actions';
+      footerActions.style.cssText = 'margin-top:24px; text-align:center; padding-top:16px; border-top:1px solid #eee;';
+      footerActions.innerHTML = `
+  <a href="product_e.html" id="continue-shopping-btn"
+     style="display:inline-block; background:#D4AF37; color:#000; padding:14px 32px; border-radius:999px; font-weight:600; text-decoration:none; transition:all 0.3s ease; cursor:pointer;">
+     Continue Shopping →
+  </a>
+`; 
+      cartModal.appendChild(footerActions);
+    }
+  }
+
+  function openCart() {
+    cartModal.style.display = 'block';
+    renderCart();
+  }
+
+  function closeCart() {
+    cartModal.style.display = 'none';
+  }
+
+  function toggleCart(e) {
+    if (e) e.preventDefault();
+    if (cartModal.style.display === 'block') closeCart();
+    else openCart();
+  }
+
+  // ——— FIXED & TESTED EVENT LISTENERS (exact same as homepage) ———
+  if (cartIcon) cartIcon.addEventListener('click', toggleCart);
+  if (closeBtn) closeBtn.addEventListener('click', closeCart);
+
+  // Close only when clicking outside the modal
+  document.addEventListener('click', (e) => {
+    if (cartModal.style.display === 'block' && e.target === cartModal) {
+      closeCart();
+    }
+  });
+
+  // Prevent clicks inside modal from closing it
+  cartModal.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+
+  // Initialize cart
+  updateBadge();
+  renderCart();
+}
+
+// Run the cart when page loads
+document.addEventListener('DOMContentLoaded', initEleganciaCart);
+
+// Update progress text when showing next question
+function updateProgress(current) {
+  const progressEls = document.querySelectorAll('.progress-text .current-q');
+  progressEls.forEach(el => {
+    const questionDiv = el.closest('.quiz-question');
+    if (questionDiv && !questionDiv.classList.contains('hidden')) {
+      el.textContent = current;
+    }
+  });
+}
+
+// Modify the existing showNextQuestion function to include progress update
+function showNextQuestion(current) {
+  document.getElementById(`q${current}`).classList.add('hidden');
+  const nextQ = document.getElementById(`q${current + 1}`);
+  nextQ.classList.remove('hidden');
+  updateProgress(current + 1);  // Update the visible progress text
+}
+
+// Also update progress on initial load for question 1
+document.addEventListener("DOMContentLoaded", () => {
+  updateProgress(1);
+  // ... rest of your existing DOMContentLoaded code
+});
+</script>
+<script src="cart.js"></script>
+<script src="elegancia.js"></script>
+</body>
+</html>

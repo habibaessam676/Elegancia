@@ -1,0 +1,800 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Elégancia — Shop</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="product.css" rel="stylesheet">
+  <link rel="icon" href="Brand photos/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="Brand photos/logo.png">
+  
+</head>
+<body>
+
+  <header class="site-header">
+    <a class="brand" href="index.html">Elégancia</a>
+    <div class="header-inner">
+      <a class="icon-linkS" href="search_e.html"><img src="search.png" alt="Search"></a>
+      <a class="icon-linkC" id="cart-icon">
+        <img src="cart.png" alt="Cart">
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+                 <a class="icon-linkP" href="profile_e.html"><img src="profile.png" alt="Profile"></a>
+    </div>
+  </header>
+
+<!-- Replace your shop intro and filters sections with this -->
+
+<div class="shop-intro">
+  <h1>Explore Our Luxurious Scents</h1>
+  <p>Browse our collection of premium perfumes, curated for every preference.</p>
+  
+  <!-- Filter Toggle Button -->
+  <button id="filter-toggle-btn" class="filter-toggle-btn">
+     Filters & Sort
+  </button>
+</div>
+
+<!-- Sidebar Filter Panel -->
+<div class="filter-sidebar" id="filter-sidebar">
+  <div class="sidebar-header">
+    <h2>Filters</h2>
+    <button id="close-sidebar-btn" class="close-sidebar-btn">&times;</button>
+  </div>
+
+  <div class="sidebar-content">
+    <!-- Category Filters Section -->
+    <div class="filter-section">
+      <h3 class="filter-heading">Scent Categories</h3>
+      <div class="category-filters">
+        <button data-category="all" class="active">All</button>
+        <button data-category="floral">Floral</button>
+        <button data-category="citrus">Citrus</button>
+        <button data-category="fresh">Fresh</button>
+        <button data-category="woody">Woody</button>
+        <button data-category="oriental">Oriental</button>
+        <button data-category="amber">Amber</button>
+        <button data-category="oud">Oud</button>
+        <button data-category="incense">Incense</button>
+        <button data-category="gourmand">Gourmand</button>
+        <button data-category="sweet">Sweet</button>
+        <button data-category="spicy">Spicy</button>
+        <button data-category="fruity">Fruity</button>
+        <button data-category="aquatic">Aquatic</button>
+        <button data-category="musky">Musky</button>
+        <button data-category="clean">Clean</button>
+        <button data-category="vanilla">Vanilla</button>
+        <button data-category="tropical">Tropical</button>
+        <button data-category="green">Green</button>
+        <button data-category="aldehydic">Aldehydic</button>
+        <button data-category="leather">Leather</button>
+        <button data-category="fig">Fig</button>
+        <button data-category="rose">Rose</button>
+        <button data-category="sandalwood">Sandalwood</button>
+        <button data-category="tuberose">Tuberose</button>
+        <button data-category="vetiver">Vetiver</button>
+      </div>
+    </div>
+
+    <!-- Gender Filters Section -->
+    <div class="filter-section">
+      <h3 class="filter-heading">Gender</h3>
+      <div class="gender-filters">
+        <button data-category="male">Male</button>
+        <button data-category="female">Female</button>
+        <button data-category="unisex">Unisex</button>
+      </div>
+    </div>
+
+    <!-- Price Range -->
+    <div class="filter-section">
+      <h3 class="filter-heading">Price Range</h3>
+      <div class="price-range">
+        <div class="price-inputs">
+          <input type="number" id="min-price" min="0" placeholder="Min">
+          <span class="price-separator">–</span>
+          <input type="number" id="max-price" min="0" placeholder="Max">
+        </div>
+        <button id="apply-price">Apply Price</button>
+      </div>
+    </div>
+
+    <!-- Sort Options -->
+    <div class="filter-section">
+      <h3 class="filter-heading">Sort By</h3>
+      <div class="sort-options">
+        <select id="sort-select">
+          <option value="featured">Featured</option>
+          <option value="price-asc">Price: Low to High</option>
+          <option value="price-desc">Price: High to Low</option>
+          <option value="name-asc">Name: A to Z</option>
+          <option value="name-desc">Name: Z to A</option>
+        </select>
+      </div>
+    </div>
+
+    <!-- Bottom Action Buttons -->
+    <div class="sidebar-actions">
+      <button id="clear-all-filters" class="clear-filters-btn">Clear All</button>
+      <button id="apply-filters-btn" class="apply-filters-btn">Apply Filters</button>
+    </div>
+  </div>
+</div>
+
+<!-- Overlay for sidebar -->
+<div class="sidebar-overlay" id="sidebar-overlay"></div>
+
+
+  <div class="product-grid">
+    <!-- All products -->
+    <div class="product-item" data-categories="tropical fruity male">
+      <img src="Brand photos/Kirke.png" alt="Kirke">
+      <h3>Kirke</h3>
+      <p>Peach, vanilla, musk, tropical fruits. Juicy and sweet.</p>
+      <div class="price">6,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Kirke', 6000, -1)">-</button>
+        <span class="qty-value" id="qty-Kirke">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Kirke', 6000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oriental floral male">
+      <img src="Brand photos/BlackOrchid.png" alt="Black Orchid">
+      <h3>Black Orchid</h3>
+      <p>Truffle, orchid, patchouli, vanilla. Luxurious and bold.</p>
+      <div class="price">6,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Black Orchid', 6000, -1)">-</button>
+        <span class="qty-value" id="qty-Black Orchid">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Black Orchid', 6000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fresh aquatic male">
+      <img src="Brand photos/Hawas.png" alt="Hawas">
+      <h3>Hawas</h3>
+      <p>Citrus, apple, and marine notes. Energetic and masculine.</p>
+      <div class="price">1,800LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Hawas', 1800, -1)">-</button>
+        <span class="qty-value" id="qty-Hawas">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Hawas', 1800, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="floral aquatic male">
+      <img src="Brand photos/Delina.png" alt="Delina">
+      <h3>Delina</h3>
+      <p>Lychee, rose, vanilla, musk. Modern and feminine.</p>
+      <div class="price">7,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Delina', 7500, -1)">-</button>
+        <span class="qty-value" id="qty-Delina">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Delina', 7500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="woody amber male">
+      <img src="Brand photos/AmberOud.png" alt="Amber Oud">
+      <h3>Amber Oud</h3>
+      <p>Rich blend of oud, amber, and warm spices. Luxurious and long-lasting.</p>
+      <div class="price">1,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Amber Oud', 1500, -1)">-</button>
+        <span class="qty-value" id="qty-Amber Oud">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Amber Oud', 1500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fresh woody male">
+      <img src="Brand photos/GypsyWater.png" alt="Gypsy Water">
+      <h3>Gypsy Water</h3>
+      <p>Bergamot, pine, sandalwood, vanilla. Bohemian and earthy.</p>
+      <div class="price">8,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Gypsy Water', 8500, -1)">-</button>
+        <span class="qty-value" id="qty-Gypsy Water">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Gypsy Water', 8500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oud floral male">
+      <img src="Brand photos/ShaghafOud.png" alt="Shaghaf Oud">
+      <h3>Shaghaf Oud</h3>
+      <p>A rich, rosy oud with saffron and amber. Elegant and intense.</p>
+      <div class="price">2,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Shaghaf Oud', 2000, -1)">-</button>
+        <span class="qty-value" id="qty-Shaghaf Oud">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Shaghaf Oud', 2000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="woody leather unisex">
+      <img src="Brand photos/Santal33.png" alt="Santal 33">
+      <h3>Santal 33</h3>
+      <p>Sandalwood, leather, violet, musk. Iconic and unisex.</p>
+      <div class="price">7,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Santal 33', 7000, -1)">-</button>
+        <span class="qty-value" id="qty-Santal 33">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Santal 33', 7000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="coffee rose unisex">
+      <img src="Brand photos/IntenseCafé.png" alt="Intense Café">
+      <h3>Intense Café</h3>
+      <p>Coffee, rose, vanilla, amber. Sweet and cozy.</p>
+      <div class="price">3,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Intense Café', 3500, -1)">-</button>
+        <span class="qty-value" id="qty-Intense Café">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Intense Café', 3500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="amber floral unisex">
+      <img src="Brand photos/BaccaratRouge.png" alt="Baccarat Rouge 540">
+      <h3>Baccarat Rouge 540</h3>
+      <p>Saffron, jasmine, amberwood, cedar. Luxe and addictive.</p>
+      <div class="price">8,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Baccarat Rouge 540', 8000, -1)">-</button>
+        <span class="qty-value" id="qty-Baccarat Rouge 540">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Baccarat Rouge 540', 8000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="spicy woody unisex">
+      <img src="Brand photos/Halfeti.png" alt="Halfeti">
+      <h3>Halfeti</h3>
+      <p>Rose, leather, oud, saffron. Dark and luxurious.</p>
+      <div class="price">6,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Halfeti', 6000, -1)">-</button>
+        <span class="qty-value" id="qty-Halfeti">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Halfeti', 6000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="honey tobacco unisex">
+      <img src="Brand photos/Naxos.png" alt="Naxos">
+      <h3>Naxos</h3>
+      <p>Honey, lavender, tobacco. Warm and aromatic.</p>
+      <div class="price">8,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Naxos', 8000, -1)">-</button>
+        <span class="qty-value" id="qty-Naxos">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Naxos', 8000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oud saffron unisex">
+      <img src="Brand photos/OudforGreatness.png" alt="Oud for Greatness">
+      <h3>Oud for Greatness</h3>
+      <p>Oud, saffron, musk, patchouli. Opulent and bold.</p>
+      <div class="price">8,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Oud for Greatness', 8000, -1)">-</button>
+        <span class="qty-value" id="qty-Oud for Greatness">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Oud for Greatness', 8000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="citrus fresh unisex">
+      <img src="Brand photos/Colonia.png" alt="Colonia">
+      <h3>Colonia</h3>
+      <p>Citrus, rosemary, lavender. Classic and crisp.</p>
+      <div class="price">3,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Colonia', 3500, -1)">-</button>
+        <span class="qty-value" id="qty-Colonia">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Colonia', 3500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="gourmand Boozy unisex">
+      <img src="Brand photos/Angels'Share.png" alt="Angel’s Share">
+      <h3>Angel’s Share</h3>
+      <p>Cognac, cinnamon, tonka bean. Boozy and sweet.</p>
+      <div class="price">7,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Angel’s Share', 7000, -1)">-</button>
+        <span class="qty-value" id="qty-Angel’s Share">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Angel’s Share', 7000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oriental rose unisex">
+      <img src="Brand photos/PortraitOfALady.png" alt="Portrait of a Lady">
+      <h3>Portrait of a Lady</h3>
+      <p>Rose, patchouli, incense. Dramatic and opulent.</p>
+      <div class="price">9,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Portrait of a Lady', 9000, -1)">-</button>
+        <span class="qty-value" id="qty-Portrait of a Lady">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Portrait of a Lady', 9000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="citrus woody unisex">
+      <img src="Brand photos/CedratBoise.png" alt="Cedrat Boise">
+      <h3>Cedrat Boise</h3>
+      <p>Citrus, cedar, musk. Fresh and woody.</p>
+      <div class="price">3,800LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Cedrat Boise', 3800, -1)">-</button>
+        <span class="qty-value" id="qty-Cedrat Boise">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Cedrat Boise', 3800, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fruity woody unisex">
+      <img src="Brand photos/Aventus.png" alt="Aventus">
+      <h3>Aventus</h3>
+      <p>Pineapple, birch, musk, patchouli. Iconic and powerful.</p>
+      <div class="price">9,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Aventus', 9000, -1)">-</button>
+        <span class="qty-value" id="qty-Aventus">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Aventus', 9000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="musky clean unisex">
+      <img src="Brand photos/NajlaMusk.png" alt="Najla Musk">
+      <h3>Najla Musk</h3>
+      <p>Light, skin-like musk with a powdery soft finish.</p>
+      <div class="price">400LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Najla Musk', 400, -1)">-</button>
+        <span class="qty-value" id="qty-Najla Musk">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Najla Musk', 400, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="amber saffron unisex">
+      <img src="Brand photos/InstantCrush.png" alt="Instant Crush">
+      <h3>Instant Crush</h3>
+      <p>Light, skin-like musk with a powdery soft finish.</p>
+      <div class="price">4,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Instant Crush', 4000, -1)">-</button>
+        <span class="qty-value" id="qty-Instant Crush">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Instant Crush', 4000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="almond vanilla unisex">
+      <img src="Brand photos/Pegasus.png" alt="Pegasus">
+      <h3>Pegasus</h3>
+      <p>Almond, vanilla, sandalwood. Creamy and soft.</p>
+      <div class="price">7,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Pegasus', 7000, -1)">-</button>
+        <span class="qty-value" id="qty-Pegasus">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Pegasus', 7000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="vanilla spicy unisex">
+      <img src="Brand photos/Ani.png" alt="Ani">
+      <h3>Ani</h3>
+      <p>Vanilla, ginger, bergamot. Spicy and creamy.</p>
+      <div class="price">6,800LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Ani', 6800, -1)">-</button>
+        <span class="qty-value" id="qty-Ani">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Ani', 6800, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="citrus woody unisex">
+      <img src="Brand photos/Bald'Afrique.png" alt="Bal d’Afrique">
+      <h3>Bal d’Afrique</h3>
+      <p>Bergamot, violet, vetiver, amber. Sunny and vibrant.</p>
+      <div class="price">5,800LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Bal d’Afrique', 5800, -1)">-</button>
+        <span class="qty-value" id="qty-Bal d’Afrique">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Bal d’Afrique', 5800, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="tobacco spicy unisex">
+      <img src="Brand photos/RedTobacco.png" alt="Red Tobacco">
+      <h3>Red Tobacco</h3>
+      <p>Tobacco, cinnamon, vanilla. Spicy and warm.</p>
+      <div class="price">4,200LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Red Tobacco', 4200, -1)">-</button>
+        <span class="qty-value" id="qty-Red Tobacco">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Red Tobacco', 4200, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oriental spicy unisex">
+      <img src="Brand photos/InterludeMan.png" alt="Interlude Man">
+      <h3>Interlude Man</h3>
+      <p>Oregano, amber, oud, leather. Bold and intense.</p>
+      <div class="price">10,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Interlude Man', 10000, -1)">-</button>
+        <span class="qty-value" id="qty-Interlude Man">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Interlude Man', 10000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fruity floral unisex">
+      <img src="Brand photos/GoodGirlGoneBad.png" alt="Good Girl Gone Bad">
+      <h3>Good Girl Gone Bad</h3>
+      <p>Osmanthus, tuberose, amber. Seductive and floral.</p>
+      <div class="price">6,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Good Girl Gone Bad', 6500, -1)">-</button>
+        <span class="qty-value" id="qty-Good Girl Gone Bad">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Good Girl Gone Bad', 6500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="citrus woody unisex">
+      <img src="Brand photos/Elysium.png" alt="Elysium">
+      <h3>Elysium</h3>
+      <p>Lemon, grapefruit, vetiver, musk. Bright and luxurious.</p>
+      <div class="price">10,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Elysium', 10000, -1)">-</button>
+        <span class="qty-value" id="qty-Elysium">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Elysium', 10000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="citrus woody unisex">
+      <img src="Brand photos/Philosykos.png" alt="Philosykos">
+      <h3>Philosykos</h3>
+      <p>Fig, coconut, cedar. Creamy and earthy.</p>
+      <div class="price">4,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Philosykos', 4500, -1)">-</button>
+        <span class="qty-value" id="qty-Philosykos">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Philosykos', 4500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fruity woody unisex">
+      <img src="Brand photos/Aventus.png" alt="Aventus">
+      <h3>Aventus</h3>
+      <p>Pineapple, birch, musk, patchouli. Iconic and powerful.</p>
+      <div class="price">9,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Aventus', 9000, -1)">-</button>
+        <span class="qty-value" id="qty-Aventus">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Aventus', 9000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oriental woody unisex">
+      <img src="Brand photos/OudWood.png" alt="Oud Wood">
+      <h3>Oud Wood</h3>
+      <p>Oud, sandalwood, vetiver, cardamom. Smoky and elegant.</p>
+      <div class="price">7,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Oud Wood', 7500, -1)">-</button>
+        <span class="qty-value" id="qty-Oud Wood">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Oud Wood', 7500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fruity woody unisex">
+      <img src="Brand photos/Hacivat.png" alt="Hacivat">
+      <h3>Hacivat</h3>
+      <p>Pineapple, oakmoss, woods. Green and powerful.</p>
+      <div class="price">6,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Hacivat', 6500, -1)">-</button>
+        <span class="qty-value" id="qty-Hacivat">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Hacivat', 6500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="gourmand boozy unisex">
+      <img src="Brand photos/Angels'Share.png" alt="Angels’ Share">
+      <h3>Angels’ Share</h3>
+      <p>Cognac, cinnamon, tonka bean. Boozy and sweet.</p>
+      <div class="price">7,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Angels’ Share', 7000, -1)">-</button>
+        <span class="qty-value" id="qty-Angels’ Share">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Angels’ Share', 7000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="rum tobacco unisex">
+      <img src="Brand photos/SideEffect.png" alt="Side Effect">
+      <h3>Side Effect</h3>
+      <p>Rum, tobacco, saffron, vanilla. Intoxicating and warm.</p>
+      <div class="price">7,800LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Side Effect', 7800, -1)">-</button>
+        <span class="qty-value" id="qty-Side Effect">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Side Effect', 7800, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fresh green unisex">
+      <img src="Brand photos/GreenIrishTweed.png" alt="Green Irish Tweed">
+      <h3>Green Irish Tweed</h3>
+      <p>Iris, sandalwood, violet leaves. Classic and refined.</p>
+      <div class="price">7,800LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Green Irish Tweed', 7800, -1)">-</button>
+        <span class="qty-value" id="qty-Green Irish Tweed">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Green Irish Tweed', 7800, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="honey tobacco unisex">
+      <img src="Brand photos/Chergui.png" alt="Chergui">
+      <h3>Chergui</h3>
+      <p>Honey, tobacco, hay, amber. Dry and sweet.</p>
+      <div class="price">5,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Chergui', 5500, -1)">-</button>
+        <span class="qty-value" id="qty-Chergui">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Chergui', 5500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oud spicy unisex">
+      <img src="Brand photos/AlexandriaII.png" alt="Alexandria II">
+      <h3>Alexandria II</h3>
+      <p>Oud, rose, spices, amber. Regal and rich.</p>
+      <div class="price">12,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Alexandria II', 12000, -1)">-</button>
+        <span class="qty-value" id="qty-Alexandria II">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Alexandria II', 12000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="gourmand coffee unisex">
+      <img src="Brand photos/BlackPahntom.png" alt="Black Phantom">
+      <h3>Black Phantom</h3>
+      <p>Coffee, rum, caramel, almond. Dark and edible.</p>
+      <div class="price">7,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Black Phantom', 7500, -1)">-</button>
+        <span class="qty-value" id="qty-Black Phantom">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Black Phantom', 7500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="leather green unisex">
+      <img src="Brand photos/IrishLeather.png" alt="Irish Leather">
+      <h3>Irish Leather</h3>
+      <p>Leather, violet, vanilla. Fresh and leathery.</p>
+      <div class="price">6,500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Irish Leather', 6500, -1)">-</button>
+        <span class="qty-value" id="qty-Irish Leather">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Irish Leather', 6500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="leather amber unisex">
+      <img src="Brand photos/SpiritoFiorentino.png" alt="Spirito Fiorentino">
+      <h3>Spirito Fiorentino</h3>
+      <p>Leather, amber, vanilla. Warm and luxurious.</p>
+      <div class="price">7,000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Spirito Fiorentino', 7000, -1)">-</button>
+        <span class="qty-value" id="qty-Spirito Fiorentino">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Spirito Fiorentino', 7000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="tobacco spicy unisex">
+      <img src="Brand photos/RedTobacco.png" alt="Red Tobacco">
+      <h3>Red Tobacco</h3>
+      <p>Tobacco, cinnamon, vanilla. Spicy and warm.</p>
+      <div class="price">4,200LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Red Tobacco', 4200, -1)">-</button>
+        <span class="qty-value" id="qty-Red Tobacco">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Red Tobacco', 4200, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fresh floral unisex">
+      <img src="Brand photos/AquaUniversalis.png" alt="Aqua Universalis">
+      <h3>Aqua Universalis</h3>
+      <p>Bergamot, lily, musk. Crisp and clean.</p>
+      <div class="price">5000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Aqua Universalis', 5000, -1)">-</button>
+        <span class="qty-value" id="qty-Aqua Universalis">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Aqua Universalis', 5000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="fresh aquatic unisex">
+      <img src="Brand photos/SilverMountainWater.png" alt="Silver Mountain Water">
+      <h3>Silver Mountain Water</h3>
+      <p>Bergamot, green tea, sandalwood. Crisp and metallic.</p>
+      <div class="price">8000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Silver Mountain Water', 8000, -1)">-</button>
+        <span class="qty-value" id="qty-Silver Mountain Water">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Silver Mountain Water', 8000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="citrus floral unisex">
+      <img src="Brand photos/Luna.png" alt="Luna">
+      <h3>Luna</h3>
+      <p>Bergamot, jasmine, amber. Bright and romantic.</p>
+      <div class="price">5500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Luna', 5500, -1)">-</button>
+        <span class="qty-value" id="qty-Luna">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Luna', 5500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="floral woody unisex">
+      <img src="Brand photos/ReflectionMan.png" alt="Reflection Man">
+      <h3>Reflection Man</h3>
+      <p>Neroli, jasmine, woods. Clean and elegant.</p>
+      <div class="price">8500LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Reflection Man', 8500, -1)">-</button>
+        <span class="qty-value" id="qty-Reflection Man">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Reflection Man', 8500, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="floral tuberose unisex">
+      <img src="Brand photos/DoSon.png" alt="Do Son">
+      <h3>Do Son</h3>
+      <p>Tuberose, orange blossom, musk. Sensual and floral.</p>
+      <div class="price">4800LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Do Son', 4800, -1)">-</button>
+        <span class="qty-value" id="qty-Do Son">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Do Son', 4800, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="oriental gourmand unisex">
+      <img src="Brand photos/NewYorkNights.png" alt="New York Nights">
+      <h3>New York Nights</h3>
+      <p>Chocolate, patchouli, amber. Decadent and bold.</p>
+      <div class="price">6000LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('New York Nights', 6000, -1)">-</button>
+        <span class="qty-value" id="qty-New York Nights">0</span>
+        <button class="inc-btn" onclick="changeQuantity('New York Nights', 6000, 1)">+</button>
+      </div>
+    </div>
+
+    <div class="product-item" data-categories="tea citrus unisex">
+      <img src="Brand photos/WulongCha.png" alt="Wulong Cha">
+      <h3>Wulong Cha</h3>
+      <p>Tea, bergamot, fig. Refreshing and aromatic.</p>
+      <div class="price">6200LE</div>
+      <div class="quantity-controls">
+        <button class="dec-btn" onclick="changeQuantity('Wulong Cha', 6200, -1)">-</button>
+        <span class="qty-value" id="qty-Wulong Cha">0</span>
+        <button class="inc-btn" onclick="changeQuantity('Wulong Cha', 6200, 1)">+</button>
+      </div>
+    </div>
+
+
+  </div>
+
+<!-- CART MODAL - Place this right before </body> -->
+<div class="cart-modal" id="cart-modal">
+    <h3>Your Cart</h3>
+    <div id="cart-items">
+      <p style="text-align:center;color:#888;padding:20px 0;">Your cart is empty</p>
+    </div>
+          <!-- CLOSE BUTTON -->
+          <button id="cart-close-btn" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:28px; cursor:pointer; color:#333; line-height:1;">
+            &times;
+          </button>    
+    <div id="cart-total">Total: 0LE</div>
+    <button id="payment-btn" onclick="location.href='payment_e.html'"
+    style="width:100%; padding:14px; margin:16px 0 8px; background:#D4AF37; color:#000; border:none; border-radius:999px; font-weight:600; cursor:pointer; transition:all 0.3s ease; font-size:16px;">
+Proceed to Payment
+</button>
+<div id="clear-cart-btn" style="text-align:right; margin: 16px 20px 0 0; display:none;">
+  <a href="#" onclick="clearCart(); return false;" 
+     style="font-size:14px; color:red; text-decoration:underline; font-weight:500;">
+    Clear Cart
+  </a>
+</div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+    <div class="search-modal-content">
+      <div class="search-header">
+        <h2>Search Products</h2>
+        <button id="close-search-btn" class="close-search-btn">&times;</button>
+      </div>
+      
+      <div class="search-input-wrapper">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Search products, pages, help, and more..." 
+          autocomplete="off"
+        >
+        <span class="search-icon">🔍</span>
+      </div>
+  
+      <div class="search-results" id="search-results">
+        <p class="search-placeholder">Start typing to search...</p>
+      </div>
+      </div>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay"></div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section company-info">
+      <h3>Elégancia</h3>
+      <p>Discover your perfect scent with personalized matching. Luxury perfumes delivered effortlessly.</p>
+      <p>Headquartered in Cairo, Egypt | Est. 2023</p>
+    </div>
+    <div class="footer-section links">
+      <h3>About Us</h3>
+      <a href="about_e.html">About Us</a>
+      <a href="blogs_e.html">Blogs</a>
+      <a href="partners_e.html">Partners</a>
+    </div>
+    <div class="footer-section support">
+      <h3>Support</h3>
+      <a href="contact_e.html">Contact Us</a>
+      <a href="help_e.html">Help Center</a>
+      <a href="issue_e.html">Report Issues</a>
+    </div>
+    <div class="footer-section legal">
+      <h3>Legal</h3>
+      <a href="privacy_e.html">Privacy Policy</a>
+      <a href="terms_e.html">Terms of Service</a>
+      <a href="returns_e.html">Returns & Exchanges</a>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-section social">
+        <h3>Follow Us</h3>
+        <div class="social-icons" style="display:flex; justify-content:center; gap:20px; margin-top:12px;">
+          <a href="https://www.instagram.com/elegancia.egy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+            <img src="instagram.png" alt="Instagram" class="social-icon">
+          </a>
+          <a href="#" target="_blank" aria-label="TikTok">
+            <img src="tiktok.png" alt="TikTok" class="social-icon">
+          </a>
+          <a href="#" target="_blank" aria-label="Facebook">
+            <img src="facebook.png" alt="Facebook" class="social-icon">
+          </a>
+          <a href="mailto:contact@elegancia.com" aria-label="Email">
+            <img src="email.png" alt="Email" class="social-icon">
+          </a>
+        </div>
+      </div>  
+      <p>© <span id="year">2025</span> Elégancia. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+<script src="cart.js"></script>
+<script src="product.js"></script>
+    <script src="elegancia.js"></script>
+      </html>

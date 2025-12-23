@@ -1,0 +1,801 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Elégancia — Personalized Perfume Boxes</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="elegancia.css" rel="stylesheet">
+  <link rel="icon" href="Brand photos/logo.png" type="image/x-icon">
+<link rel="shortcut icon" href="Brand photos/logo.png">
+  <style>
+    /* Fix cart modal position + badge */
+    .icon-linkC {
+      position: relative;
+      display: inline-block;
+    }
+    .cart-badge {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #D4AF37;
+      color: #000;
+      font-size: 11px;
+      font-weight: bold;
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .cart-modal {
+      display: none;
+      position: fixed;
+      top: 90px;
+      right: 20px;
+      width: 360px;
+      max-height: 80vh;
+      overflow-y: auto;
+      background: #fff;
+      border: 1px solid #D4AF37;
+      border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+      z-index: 9999;
+      padding: 24px;
+      font-family: 'Inter', sans-serif;
+    }
+    .cart-modal h3 {
+      margin: 0 0 16px;
+      color: #D4AF37;
+      border-bottom: 1px solid #f0e6d2;
+      padding-bottom: 10px;
+    }
+    #cart-items {
+      min-height: 60px;
+    }
+    #cart-total {
+      font-weight: bold;
+      font-size: 1.2rem;
+      margin: 16px 0;
+      padding-top: 12px;
+      border-top: 1px solid #D4AF37;
+    }
+    #continue-shopping-btn:hover {
+  background: #000000 !important;
+  color: #D4AF37 !important;
+  transform: scale(1.05);
+  box-shadow: 0 8px 20px rgba(212, 175, 55, 0.3);
+}
+
+.social-icon {
+  width: 32px;
+  height: 32px;
+  transition: all 0.5s ease;
+  opacity: 1; /* ← Always fully visible */
+}
+
+.social-icon:hover {
+  /* Combined filter: gold tint + stronger glow */
+  transform: scale(1.2) translateY(1px); /* Grow and lift up on hover */
+  opacity: 1;
+}
+
+/* Search Modal Styles */
+.search-modal {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 700px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  transition: top 0.4s ease;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.search-modal.open {
+  top: 10vh;
+}
+
+.search-modal-content {
+  padding: 30px;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.search-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #D4AF37;
+  margin: 0;
+}
+
+.close-search-btn {
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.close-search-btn:hover {
+  color: #D4AF37;
+}
+
+/* Search Input */
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  border: 2px solid #D4AF37;
+  border-radius: 999px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+/* Search Results */
+.search-results {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.search-placeholder {
+  text-align: center;
+  color: #888;
+  padding: 40px 20px;
+  font-size: 15px;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-result-item:hover {
+  background: #faf9f6;
+  transform: translateX(1.5px);
+}
+
+.search-result-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #D4AF37;
+}
+
+.search-result-info {
+  flex: 1;
+}
+
+.search-result-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.search-result-desc {
+  font-size: 13px;
+  color: #666;
+}
+
+.search-result-price {
+  font-weight: bold;
+  color: #D4AF37;
+  font-size: 16px;
+}
+
+/* Search Overlay */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.search-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-modal {
+    width: 95%;
+    max-width: none;
+  }
+
+  .search-modal.open {
+    top: 5vh;
+  }
+
+  .search-modal-content {
+    padding: 20px;
+  }
+
+  .search-header h2 {
+    font-size: 22px;
+  }
+
+  .filter-chips {
+    justify-content: center;
+  }
+}
+
+  </style>
+</head>
+<body>
+    <!-- HEADER - Same as shop page -->
+    <header class="site-header">
+      <a class="brand" href="index.html">Elégancia</a>
+      <div class="header-inner">
+        <a class="icon-linkS" href="search_e.html"><img src="search.png" alt="Search"></a>
+        <a class="icon-linkC" id="cart-icon" href="">
+            <img src="cart.png" alt="Cart">
+            <span class="cart-badge" id="cart-badge">0</span>
+          </a>
+        <a class="icon-linkP" href="profile_e.html"><img src="profile.png" alt="Profile"></a>
+      </div>
+    </header>
+  
+    <!-- YOUR FULL HOMEPAGE CONTENT (hero, how it works, etc.) -->
+    <section class="hero">
+      <video autoplay loop muted playsinline class="hero-video">
+        <source src="background.mp4" type="video/mp4">
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-left">
+        <h1>Discover Your Perfect Scent,<span style="color:white">Effortlessly</span></h1>
+        <p><span style="color:white;">Discover fragrances perfectly matched to you, delivered as samples before you ever commit.</span></p>
+        <div class="actions">
+          <a class="btn" href="scent_quiz_e.html">Discover Your Scent</a>
+          <a class="how-link" href="create_e.html">Create Yours</a>
+        </div>
+        <div class="mt-6">
+          <div style="display:flex; gap:18px; flex-wrap:wrap; margin-top:8px; margin-left:90px;">
+            <div><span style="color:white; font-size:26px;">✓</span> <span style="color:white; font-weight:500;"> Personalized Matches</span></div>
+            <div><span style="color:white; font-size:26px;">✓</span> <span style="color:white; font-weight:500;"> Same-Day Delivery</span></div>
+            <div><span style="color:white; font-size:26px;">✓</span> <span style="color:white; font-weight:500;"> Try Before You Buy</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS – Step 1 softened (no AI mention) -->
+    <section id="how" class="mt-6">
+      <h2 style="font-size:22px; margin-left: 50px; margin-top: -60px;">How Elégancia Works</h2>
+      <div class="grid3">
+        <div class="card step">
+          <div class="num">1</div>
+          <div>
+            <div style="font-weight:600">Take the Scent Quiz</div>
+            <div style="color:var(--muted); font-size:14px">A few quick questions about your style and preferences — we’ll reveal the fragrances made for you.</div>
+          </div>
+        </div>
+        <div class="card step">
+          <div class="num">2</div>
+          <div>
+            <div style="font-weight:600">Scent Sampling</div>
+            <div style="color:var(--muted); font-size:14px">Receive personalized perfume samples delivered to your door to experience your top matches.</div>
+          </div>
+        </div>
+        <div class="card step">
+          <div class="num">3</div>
+          <div>
+            <div style="font-weight:600">Fast Delivery</div>
+            <div style="color:var(--muted); font-size:14px">Enjoy quick, reliable delivery of your chosen perfumes right to your doorstep.</div>
+          </div>
+        </div>
+        <div class="card step">
+          <div class="num">4</div>
+          <div>
+            <div style="font-weight:600">Choose & Purchase</div>
+            <div style="color:var(--muted); font-size:14px">Fall in love with a scent? Order the full size with just one click.</div>
+          </div>
+        </div>
+      </div>
+    </section>
+    
+<!-- Updated PRODUCTS section: Images now show the full bottle without cropping -->
+
+<section id="shop" class="mt-6" style="background: linear-gradient(135deg, #faf9f6 0%, #f5f0e6 100%); padding: 80px 20px; margin-top: 80px;">
+  <div class="trending-header" style="max-width: 1200px; margin: 0 auto 50px;">
+    <div style="text-align: center; margin-bottom: 40px;">
+      <span style="color: #D4AF37; font-size: 14px; font-weight: 600; text-transform: uppercase; letter-spacing: 2px;">✨ Discover Now</span>
+      <h2 style="font-family: 'Playfair Display', serif; font-size: 48px; color: #000; margin: 10px 0 20px; font-weight: 700;">Trending Scents</h2>
+      <p style="font-size: 18px; color: #666; max-width: 600px; margin: 0 auto 30px;">Explore our most loved fragrances, curated just for you</p>
+      
+      <!-- CTA Button -->
+      <a href="product_e.html" class="explore-cta" style="
+        display: inline-block;
+        background: linear-gradient(135deg, #D4AF37 0%, #b8941f 100%);
+        color: #000;
+        padding: 18px 48px;
+        border-radius: 999px;
+        font-size: 18px;
+        font-weight: 700;
+        text-decoration: none;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        box-shadow: 0 8px 24px rgba(212, 175, 55, 0.4);
+        transition: all 0.4s ease;
+        border: 2px solid transparent;
+      " onmouseover="this.style.transform='translateY(1px) scale(1.05)'; this.style.boxShadow='0 12px 32px rgba(212, 175, 55, 0.6)'; this.style.color='white'; this.style.borderColor='#D4AF37';" onmouseout="this.style.transform=''; this.style.boxShadow='0 8px 24px rgba(212, 175, 55, 0.4)'; this.style.background='linear-gradient(135deg, #D4AF37 0%, #b8941f 100%)'; this.style.color='#000'; this.style.borderColor='transparent';">
+        Explore All Scents →
+      </a>
+    </div>
+  </div>
+
+  <!-- Enhanced Products Grid -->
+  <div class="products" style="
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 40px;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  ">
+    
+    <!-- Product 1 -->
+    <div class="prod enhanced-prod" style="
+      background: #f8f8f8;
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s ease;
+      border: 2px solid transparent;
+      position: relative;
+    " onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 20px 60px rgba(212, 175, 55, 0.3)'; this.style.borderColor='#D4AF37';" onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.1)'; this.style.borderColor='transparent';">
+      <div style="position: absolute; top: 15px; right: 15px; background: #D4AF37; color: #000; padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; z-index: 10;">TRENDING</div>
+      <img alt="Nocturne Oud" src="Brand photos/Aventus.png" style="width: 100%; height: 240px; object-fit: contain; background: #ffffff;">
+      <div class="prod-body" style="padding: 24px;">
+        <div class="prod-brand" style="font-size: 13px; color: #D4AF37; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Maison Luxe</div>
+        <div class="prod-name" style="font-family: 'Playfair Display', serif; font-size: 24px; color: #000; margin: 8px 0 12px; font-weight: 700;">Aventus</div>
+        <p style="font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6;">Pineapple, birch, musk, patchouli. Iconic and powerful.</p>
+        <div class="prod-actions" style="display: flex; gap: 12px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="prod enhanced-prod" style="background: #f8f8f8; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; border: 2px solid transparent; position: relative;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 20px 60px rgba(212, 175, 55, 0.3)'; this.style.borderColor='#D4AF37';" onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.1)'; this.style.borderColor='transparent';">
+      <div style="position: absolute; top: 15px; right: 15px; background: #10b981; color: #fff; padding: 6px 14px; border-radius: 999px; font-size: 12px; font-weight: 700; z-index: 10;">NEW</div>
+      <img alt="Amber Veil" src="Brand photos/OudWood.png" style="width: 100%; height: 240px; object-fit: contain; background: #ffffff;">
+      <div class="prod-body" style="padding: 24px;">
+        <div class="prod-brand" style="font-size: 13px; color: #D4AF37; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Elégancia</div>
+        <div class="prod-name" style="font-family: 'Playfair Display', serif; font-size: 24px; color: #000; margin: 8px 0 12px; font-weight: 700;">Oud Wood</div>
+        <p style="font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6;">Oud, sandalwood, vetiver, cardamom. Smoky and elegant.</p>
+        <div class="prod-actions" style="display: flex; gap: 12px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="prod enhanced-prod" style="background: #f8f8f8; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; border: 2px solid transparent;" onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 20px 60px rgba(212, 175, 55, 0.3)'; this.style.borderColor='#D4AF37';" onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.1)'; this.style.borderColor='transparent';">
+      <img alt="Citrus Bloom" src="Brand photos/Hacivat.png" style="width: 100%; height: 240px; object-fit: contain; background: #ffffff;">
+      <div class="prod-body" style="padding: 24px;">
+        <div class="prod-brand" style="font-size: 13px; color: #D4AF37; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">Verde</div>
+        <div class="prod-name" style="font-family: 'Playfair Display', serif; font-size: 24px; color: #000; margin: 8px 0 12px; font-weight: 700;">Hacivat</div>
+        <p style="font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6;">Pineapple, oakmoss, woods. Green and powerful.</p>
+        <div class="prod-actions" style="display: flex; gap: 12px;">
+        </div>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="prod enhanced-prod" style="background: #f8f8f8; border-radius: 20px; overflow: hidden; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1); transition: all 0.4s ease; border: 2px solid transparent;" onmouseover="this.style.transform='translateY(-15px)'; this.style.boxShadow='0 20px 60px rgba(212, 175, 55, 0.3)'; this.style.borderColor='#D4AF37';" onmouseout="this.style.transform=''; this.style.boxShadow='0 10px 40px rgba(0, 0, 0, 0.1)'; this.style.borderColor='transparent';">
+      <img alt="Velvet Rose" src="Brand photos/IntenseCafé.png" style="width: 100%; height: 240px; object-fit: contain; background: #ffffff;">
+      <div class="prod-body" style="padding: 24px;">
+        <div class="prod-brand" style="font-size: 13px; color: #D4AF37; font-weight: 600; text-transform: uppercase; letter-spacing: 1px;">L'Atelier</div>
+        <div class="prod-name" style="font-family: 'Playfair Display', serif; font-size: 24px; color: #000; margin: 8px 0 12px; font-weight: 700;">Intense Café</div>
+        <p style="font-size: 14px; color: #666; margin-bottom: 20px; line-height: 1.6;">Coffee, rose, vanilla, amber. Sweet and cozy.</p>
+        <div class="prod-actions" style="display: flex; gap: 12px;">
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+    <!-- BEHIND THE SCENTS – Carousel -->
+    <section id="behind" class="mt-6">
+      <div class="behind-header">
+        <h2>Behind The Scents</h2>
+        <a class="more-link" href="events_e.html">Read More →</a>
+      </div>
+      <div class="carousel-container mt-6">
+        <div class="carousel-track">
+          <div class="carousel-item">
+            <img alt="Spring Bloom Launch Event" src="Brand photos/event1.png">
+            <div class="caption">Spring Bloom Launch Event</div>
+          </div>
+          <div class="carousel-item">
+            <img alt="Fragrance Experience Booth" src="Brand photos/event3.png">
+            <div class="caption">Fragrance Experience Booth</div>
+          </div>
+          <div class="carousel-item">
+            <img alt="Elégancia x Dior Collaboration" src="Brand photos/event2.png">
+            <div class="caption">Elégancia x Dior Collaboration</div>
+          </div>
+          <div class="carousel-item">
+            <img alt="Luxury Scent Exhibition" src="Brand photos/event4.png">
+            <div class="caption">Luxury Scent Exhibition</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FAQ – Also softened the AI question -->
+    <section id="faq" class="mt-6">
+      <h2 style="font-size:20px; margin: 50px; margin-bottom: 20px;">Frequently Asked Questions</h2>
+      <div class="faq-item">
+        <button class="faq-question">How do you find my perfect scent?</button>
+        <div class="faq-answer">
+          A short, curated quiz reveals your preferences — we then match you with fragrances you’ll truly love.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">How fast will I receive my sample box?</button>
+        <div class="faq-answer">
+          We offer same-day delivery for local areas, ensuring your samples arrive within hours.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Can I return or exchange perfumes?</button>
+        <div class="faq-answer">
+          Yes! If you're not satisfied, you can exchange unopened perfumes or request a new sample set.
+        </div>
+      </div>
+      <div class="faq-item">
+        <button class="faq-question">Do you collaborate with luxury brands?</button>
+        <div class="faq-answer">
+          Absolutely — we partner with global and niche perfume houses to bring you exclusive scents.
+        </div>
+      </div>
+    </section>
+
+<!-- Customer Feedbacks – Now with beautiful gold stars & optional avatars -->
+<section id="customer-feedback" class="mt-6" style="padding: 80px 20px; background:#faf9f6;">
+    <h2 style="font-size:28px; text-align:center; color:#D4AF37; font-family:'Playfair Display',serif; margin-bottom:60px;">
+      What Our Customers Say
+    </h2>
+  
+    <div class="feedback-grid" style="display:grid; grid-template-columns:repeat(auto-fit,minmax(300px,1fr)); gap:40px; max-width:1200px; margin:0 auto;">
+      
+      <div class="feedback-card" style="background:#fff; padding:32px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:1px solid #f0e6d2; transition:all 0.3s;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+          <img src="yara.jpg" alt="Alex" style="width:60px; height:60px; border-radius:50%; object-fit:cover; border:3px solid #D4AF37;">
+          <div>
+            <h4 style="margin:0; font-size:1.1rem; color:#333;">Yara Mahmoud</h4>
+            <p style="margin:4px 0 0; font-size:0.9rem; color:#888;">Zamalek</p>
+          </div>
+        </div>
+        <p style="font-style:italic; line-height:1.8; color:#444; margin-bottom:16px;">
+            "The samples arrived the same day! Tried 5 scents and finally found my signature one. Thank you Elégancia 🖤"        </p>
+        <div style="color:#D4AF37; font-size:1.4rem; letter-spacing:4px;">★★★★★</div>
+      </div>
+  
+      <div class="feedback-card" style="background:#fff; padding:32px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:1px solid #f0e6d2; transition:all 0.3s;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+          <img src="omar.jpg" alt="Jordan" style="width:60px; height:60px; border-radius:50%; object-fit:cover; border:3px solid #D4AF37;">
+          <div>
+            <h4 style="margin:0; font-size:1.1rem; color:#333;">Omar Sherif</h4>
+            <p style="margin:4px 0 0; font-size:0.9rem; color:#888;">Nasr City</p>
+          </div>
+        </div>
+        <p style="font-style:italic; line-height:1.8; color:#444; margin-bottom:16px;">
+            "First time trying niche perfumes without fear of buying a full bottle I’ll regret. Service is excellent and delivery is super fast in Nasr City."        </p>
+        <div style="color:#D4AF37; font-size:1.4rem; letter-spacing:4px;">★★★★</div>
+      </div>
+  
+      <div class="feedback-card" style="background:#fff; padding:32px; border-radius:16px; box-shadow:0 10px 30px rgba(0,0,0,0.08); border:1px solid #f0e6d2; transition:all 0.3s;">
+        <div style="display:flex; align-items:center; gap:16px; margin-bottom:16px;">
+          <img src="salma.jpg" alt="Casey" style="width:60px; height:60px; border-radius:50%; object-fit:cover; border:3px solid #D4AF37;">
+          <div>
+            <h4 style="margin:0; font-size:1.1rem; color:#333;">Salma El-Sayed</h4>
+            <p style="margin:4px 0 0; font-size:0.9rem; color:#888;">Maadi</p>
+          </div>
+        </div>
+        <p style="font-style:italic; line-height:1.8; color:#444; margin-bottom:16px;">
+            "The quiz actually shocked me! I always struggled choosing, now Amber Veil is my daily scent and all my friends keep asking about it 🥰"        </p>
+        <div style="color:#D4AF37; font-size:1.4rem; letter-spacing:4px;">★★★★★</div>
+      </div>
+  
+    </div>
+  
+    <!-- Add Feedback Button -->
+    <div style="text-align:center; margin-top:60px;">
+      <a href="feedback_e.html" class="btn" style="background:#D4AF37; color:#000; padding:16px 40px; font-size:1.2rem; font-weight:600;">
+        Add Your Own Feedback
+      </a>
+    </div>
+  </section>
+
+<!-- CART MODAL -->
+<div class="cart-modal" id="cart-modal">
+    <h3>Your Cart</h3>
+    <div id="cart-items">
+      <p style="text-align:center;color:#888;padding:20px 0;">Your cart is empty</p>
+    </div>
+      <!-- CLOSE BUTTON -->
+      <button id="cart-close-btn" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:28px; cursor:pointer; color:#333; line-height:1;">
+        &times;
+      </button>
+    <div id="cart-total">Total: $0</div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+    <div class="search-modal-content">
+      <div class="search-header">
+        <h2>Search Products</h2>
+        <button id="close-search-btn" class="close-search-btn">&times;</button>
+      </div>
+      
+      <div class="search-input-wrapper">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Search products, pages, help, and more..." 
+          autocomplete="off"
+        >
+        <span class="search-icon">🔍</span>
+      </div>
+  
+      <div class="search-results" id="search-results">
+        <p class="search-placeholder">Start typing to search...</p>
+      </div>
+      </div>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay"></div>
+
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-content">
+    <div class="footer-section company-info">
+      <h3>Elégancia</h3>
+      <p>Discover your perfect scent with personalized matching. Luxury perfumes delivered effortlessly.</p>
+      <p>Headquartered in Cairo, Egypt | Est. 2023</p>
+    </div>
+    <div class="footer-section links">
+      <h3>About Us</h3>
+      <a href="about_e.html">About Us</a>
+      <a href="blogs_e.html">Blogs</a>
+      <a href="partners_e.html">Partners</a>
+    </div>
+    <div class="footer-section support">
+      <h3>Support</h3>
+      <a href="contact_e.html">Contact Us</a>
+      <a href="help_e.html">Help Center</a>
+      <a href="issue_e.html">Report Issues</a>
+    </div>
+    <div class="footer-section legal">
+      <h3>Legal</h3>
+      <a href="privacy_e.html">Privacy Policy</a>
+      <a href="terms_e.html">Terms of Service</a>
+      <a href="returns_e.html">Returns & Exchanges</a>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-section social">
+        <h3>Follow Us</h3>
+        <div class="social-icons" style="display:flex; justify-content:center; gap:20px; margin-top:12px;">
+          <a href="https://www.instagram.com/elegancia.egy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+            <img src="instagram.png" alt="Instagram" class="social-icon">
+          </a>
+          <a href="#" target="_blank" aria-label="TikTok">
+            <img src="tiktok.png" alt="TikTok" class="social-icon">
+          </a>
+          <a href="#" target="_blank" aria-label="Facebook">
+            <img src="facebook.png" alt="Facebook" class="social-icon">
+          </a>
+          <a href="mailto:contact@elegancia.com" aria-label="Email">
+            <img src="email.png" alt="Email" class="social-icon">
+          </a>
+        </div>
+      </div>  
+      <p>© <span id="year">2025</span> Elégancia. All rights reserved.</p>
+    </div>
+  </div>
+</footer>
+
+  <script>
+    /* ===============================================
+       ELÉGANCIA CART – WITH "Continue Shopping" + CLOSE X BUTTON
+       =============================================== */
+    function initEleganciaCart() {
+      const CART_KEY = 'elegancia_cart';
+      const cartIcon = document.getElementById('cart-icon');
+      const cartModal = document.getElementById('cart-modal');
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalEl = document.getElementById('cart-total');
+      const cartBadge = document.getElementById('cart-badge');
+      
+      // NEW: close button
+      const closeBtn = document.getElementById('cart-close-btn');
+    
+      function getCart() {
+        return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      }
+    
+      function saveCart(cart) {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        updateBadge();
+        renderCart();
+      }
+    
+      function updateBadge() {
+        const totalItems = getCart().reduce((sum, item) => sum + item.qty, 0);
+        if (cartBadge) {
+          cartBadge.textContent = totalItems;
+          cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+      }
+    
+      window.addToCart = function(name, price = 0) {
+        const cart = getCart();
+        const existing = cart.find(item => item.name === name);
+        if (existing) existing.qty += 1;
+        else cart.push({ name, price, qty: 1 });
+        saveCart(cart);
+        alert(`${name} added to cart!`);
+      };
+    
+      window.changeQty = function(name, price, delta) {
+        let cart = getCart();
+        const item = cart.find(i => i.name === name);
+        if (item) {
+          item.qty += delta;
+          if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+        }
+        saveCart(cart);
+      };
+    
+      function renderCart() {
+        if (!cartItemsContainer || !cartTotalEl) return;
+    
+        const cart = getCart();
+        let totalPrice = 0;
+    
+        cartItemsContainer.innerHTML = '';
+    
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = `<p style="text-align:center;color:#888;padding:40px 0;">Your cart is empty</p>`;
+          cartTotalEl.textContent = 'Total: $0';
+    
+          const actions = cartModal.querySelector('#cart-footer-actions');
+          if (actions) actions.remove();
+    
+          return;
+        }
+    
+        cart.forEach(item => {
+          totalPrice += item.price * item.qty;
+    
+          const itemHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #eee;">
+              <div style="flex:1;">
+                <strong>${item.name}</strong><br>
+                <small>$${item.price} × ${item.qty}</small>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button onclick="changeQty('${item.name}', ${item.price}, -1)"
+                        style="width:34px;height:34px;border:none;border-radius:50%;background:#000;color:#D4AF37;font-weight:bold;cursor:pointer;">−</button>
+                <span style="min-width:30px;text-align:center;font-weight:600;">${item.qty}</span>
+                <button onclick="changeQty('${item.name}', ${item.price}, 1)"
+                        style="width:34px;height:34px;border:none;border-radius:50%;background:#D4AF37;color:#fff;font-weight:bold;cursor:pointer;">+</button>
+              </div>
+            </div>`;
+          cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+        });
+    
+        cartTotalEl.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    
+        let footerActions = cartModal.querySelector('#cart-footer-actions');
+        if (!footerActions) {
+          footerActions = document.createElement('div');
+          footerActions.id = 'cart-footer-actions';
+          footerActions.style.cssText = 'margin-top:24px; text-align:center; padding-top:16px; border-top:1px solid #eee;';
+          footerActions.innerHTML = `
+  <a href="product_e.html" id="continue-shopping-btn"
+     style="display:inline-block; background:#D4AF37; color:#000; padding:14px 32px; border-radius:999px; font-weight:600; text-decoration:none; transition:all 0.3s ease; cursor:pointer;">
+     Continue Shopping →
+  </a>
+`; 
+         cartModal.appendChild(footerActions);
+        }
+      }
+    
+      function openCart() {
+        cartModal.style.display = 'block';
+        renderCart();
+      }
+    
+      function closeCart() {
+        cartModal.style.display = 'none';
+      }
+    
+      function toggleCart(e) {
+        if (e) e.preventDefault();
+        if (cartModal.style.display === 'block') closeCart();
+        else openCart();
+      }
+    
+// Event listeners
+if (cartIcon) cartIcon.addEventListener('click', toggleCart);
+if (closeBtn) closeBtn.addEventListener('click', closeCart);
+
+// Close only when clicking outside (on the backdrop)
+document.addEventListener('click', (body) => {
+  if (cartModal.style.display === 'block' && body.target === cartModal) {
+    closeCart();
+  }
+});
+
+// Prevent any click inside the modal from bubbling up and closing it
+cartModal.addEventListener('click', (body) => {
+  e.stopPropagation();
+});
+    
+      // Init
+      updateBadge();
+      renderCart();
+    }
+    
+    // RUN ON PAGE LOAD
+    document.addEventListener('DOMContentLoaded', initEleganciaCart);
+    </script>
+    <script src="cart.js"></script>
+        <script src="elegancia.js"></script>
+</body>
+</html>

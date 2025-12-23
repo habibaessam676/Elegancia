@@ -1,0 +1,837 @@
+/* ---------------------------------
+   ✨ Base & Global Styles (White, Black, Gold Hover, Beige Divs)
+--------------------------------- */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  a {
+    color: #000000; /* black links */
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  a:hover {
+    color: #D4AF37; /* gold hover */
+    transform: translateY(-2px);
+    text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+  }
+  .container {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 28px;
+  }
+  /* ---------------------------------
+     🌿 Header Navigation (Aligned Top Bar)
+  --------------------------------- */
+  /* 🌿 Fixed Header Navigation (Sticky on Top) */
+  .site-header {
+    position: fixed; /* ✅ makes it stay visible on scroll */
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000; /* keeps it above all other elements */
+    padding: 16px 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #FFFFFFe6; /* white header */
+    backdrop-filter: blur(-2900px); /* soft glassy blur behind */
+    box-shadow: 0 2px 8px rgba(212, 175, 55, 0.1); /* subtle shadow for depth */
+    transition: background 0.3s ease, box-shadow 0.3s ease;
+  }
+  /* Optional: Add top spacing to body so content doesn’t hide behind navbar */
+  body {
+    margin: 0;
+    font-family: 'Inter', system-ui, Arial, sans-serif;
+    background: #F5F5F5; /* white background */
+    color: #000000; /* black text */
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    padding-top: 90px; /* ✅ adjust depending on navbar height */
+  }
+  /* Brand – far left */
+  .brand {
+    font-family: 'Playfair Display', serif;
+    font-size: 48px;
+    color: #D4AF37; /* gold for important text */
+    text-decoration: none;
+    white-space: nowrap;
+    transition: all 0.3s ease;
+  }
+  .brand:hover {
+    color: #000000; /* black hover */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  /* Nav Links – centered */
+  .nav-desktop {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .nav-desktop .link {
+    font-size: 17px;
+    color: #000000;
+    font-weight: bold;
+    margin-left: 40px;
+    transition: all 0.3s ease;
+  }
+  .nav-desktop .link:hover {
+    color: #D4AF37;
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+/* ——— HEADER WITH PNG ICONS ——— */
+.header-inner {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-right: -20px;
+  }
+    
+  /* search icon */
+  .icon-linkS {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    height: 30px;
+    padding: 0;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .icon-linkS:hover {
+    background: none !important;
+    transform: scale(1.2) translateY(-3px);
+  }
+  .icon-linkS img {
+    width: 30px;
+    height: 30px;
+    filter: brightness(0);
+    transition: all 0.3s ease;
+  }
+  .icon-linkS:hover img {
+    filter: brightness(0) hue-rotate(60deg) brightness(1.3);
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+  }
+
+
+  /* cart icon */
+  .icon-linkC {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 35px;
+    height: 35px;
+    padding: 0;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .icon-linkC:hover {
+    background: none !important;
+    transform: scale(1.2) translateY(-3px);
+  }
+  .icon-linkC img {
+    width: 35px;
+    height: 35px;
+    filter: brightness(0);
+    transition: all 0.3s ease;
+  }
+  .icon-linkC:hover img {
+    filter: brightness(0) hue-rotate(60deg) brightness(1.3);
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+  }
+
+
+  /* profile icon */
+  .icon-linkP {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    padding: 0;
+    background: none !important;
+    border: none !important;
+    border-radius: 0 !important;
+    transition: all 0.3s ease;
+    cursor: pointer;
+  }
+  .icon-linkP:hover {                /* ← fixed typo here (was .icon-linkp) */
+    background: none !important;
+    transform: scale(1.2) translateY(-3px);
+  }
+  .icon-linkP img {
+    width: 28px;
+    height: 28px;
+    filter: brightness(0);
+    transition: all 0.3s ease;
+  }
+  .icon-linkP:hover img {
+    filter: brightness(0) hue-rotate(60deg) brightness(1.3);
+    transform: scale(1.15);
+    filter: drop-shadow(0 0 8px rgba(212, 175, 55, 0.6));
+  }
+  /* Responsive header */
+  @media (max-width: 900px) {
+    .site-header {
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+      padding: 14px 20px;
+      background-color: #F5F5F5;
+    }
+    .nav-desktop {
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .create-account-btn {
+      margin-top: 10px;
+    }
+  }
+  /* ---------------------------------
+     💛 Buttons (Matching Create Account Hover)
+  --------------------------------- */
+  .btn {
+    background: #F5F5DC; /* light beige */
+    color: #000000;
+    border: 1px solid #D4AF37; /* gold outline */
+    padding: 12px 26px;
+    border-radius: 999px;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.3s ease;
+    text-decoration: none;
+    box-shadow: 0 6px 12px rgba(212, 175, 55, 0.2);
+    display: inline-block;
+  }
+  .btn:hover {
+    background: #D4AF37; /* gold hover */
+    color: #FFFFFF;
+    transform: translateY(-8px); /* 👈 bigger visible jump */
+    box-shadow: 0 12px 25px rgba(212, 175, 55, 0.45), 0 0 10px #D4AF37; /* gold glow */
+  }
+  /* ---------------------------------
+     ✨ How It Works Link (like navbar)
+  --------------------------------- */
+  .how-link {
+    color: white;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    margin-left: 12px;
+    transition: all 0.3s ease;
+    display: inline-block;
+  }
+  .how-link:hover {
+    color: #D4AF37;
+    transform: translateY(-2px);
+    text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+  }
+  /* ---------------------------------
+     ✨ "Read More" & "Explore All Scents" Links
+     (Same hover style as navbar links)
+  --------------------------------- */
+  .scent-link {
+    color: #000000;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    margin-right: 30px;
+  }
+  .scent-link:hover {
+    color: #D4AF37;
+    transform: translateY(-2px);
+    text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+  }
+  /* ------------------------------
+     🌸 Behind the Scents Header
+  ------------------------------ */
+  .behind-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 0 50px 10px 50px;
+  }
+  .behind-header h2 {
+    font-size: 20px;
+    color: #000000; /* gold for important text */
+    margin: 0;
+    transition: all 0.3s ease;
+  }
+  .more-link {
+    color: #000000;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .more-link:hover {
+    color: #D4AF37;
+    transform: translateY(-2px);
+    text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+  }
+  /* -------------------------------------------------
+     HERO – background video
+  ------------------------------------------------- */
+  .hero {
+    position: relative; /* needed for absolute children */
+    min-height: 85vh; /* give it a height */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: 15px;
+    margin-left: 0; /* reset old left margin */
+    margin-bottom: 90px;
+    padding: 0 20px;
+  }
+  /* Full-screen video */
+  .hero-video {
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -2;
+  }
+  /* Dark overlay – keeps gold/white text readable */
+  .hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: -1;
+  }
+  /* Center the text block */
+  .hero-left {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    max-width: 800px;
+    padding: 2rem;
+  }
+  .hero-left h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.8rem;
+    color: #D4AF37; /* gold for important text */
+    transition: all 0.3s ease;
+  }
+  .hero-left p {
+    color: #000000;
+    margin: 0 0 18px;
+  }
+  @media (min-width: 880px) {
+    .hero-left h1 { font-size: 3.8rem; }
+  }
+  /* Remove the old .hero-right image (you asked to delete it) */
+  .hero-right { display: none; }
+  /* ---------------------------------
+     🧴 How It Works Section
+  --------------------------------- */
+  .grid3 {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+    margin-top: 28px;
+    margin-bottom: 28px;
+    justify-items: center;
+  }
+  .step {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    background: #F5F5DC; /* light beige cards */
+    border: 1px solid #D4AF37; /* gold outline */
+    border-radius: 14px;
+    padding: 22px;
+    width: 70%;
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.08);
+    transition: all 0.3s ease;
+  }
+  .step:hover {
+    box-shadow: 0 6px 20px rgba(212, 175, 55, 0.45), 0 0 10px #D4AF37; /* gold glow on hover */
+  }
+  .step .num {
+    background: linear-gradient(180deg, #F5F5DC, #F5F5DC);
+    color: #000000;
+    font-weight: 700;
+    padding: 10px 12px;
+    border-radius: 12px;
+    min-width: 44px;
+    text-align: center;
+  }
+  @media (min-width: 880px) {
+    .grid3 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+  }
+  /* ---------------------------------
+     🌷 Products Section
+  --------------------------------- */
+  .products {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    margin-top: -15px;
+    margin-bottom: 40px;
+    margin-left: 50px;
+    margin-right: 50px;
+  }
+  .prod {
+    background: #F5F5DC; /* light beige products */
+    border: 1px solid #D4AF37; /* gold outline */
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 4px 14px rgba(212, 175, 55, 0.1);
+    transition: all 0.3s ease;
+  }
+  .prod:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 25px rgba(212, 175, 55, 0.25), 0 0 10px #D4AF37; /* gold glow on hover */
+  }
+  .prod img {
+    width: 100%;
+    height: 180px;
+    object-fit: cover;
+  }
+  .prod-body {
+    padding: 12px;
+  }
+  .prod-brand {
+    font-size: 13px;
+    color: #666666; /* muted gray */
+  }
+  .prod-name {
+    font-weight: 600;
+    color: #D4AF37; /* gold for important text */
+    margin-top: 6px;
+    transition: all 0.3s ease;
+  }
+  .prod-name:hover {
+    color: #000000; /* black hover */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  .prod-actions {
+    display: flex;
+    justify-content: space-between; /* pushes Buy to right */
+    align-items: center;
+    margin-top: 10px;
+  }
+  /* Make both buttons filled (no outline) */
+  .btn {
+    background: #F5F5DC;
+    color: #000000;
+    border: 1px solid #D4AF37; /* gold outline */
+    padding: 10px 22px;
+    border-radius: 999px;
+    font-weight: 600;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(212, 175, 55, 0.15);
+  }
+  .btn:hover {
+    background: #D4AF37;
+    color: #FFFFFF;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.3), 0 0 10px #D4AF37; /* gold glow */
+  }
+  .btn-outline {
+    background: none;
+    border: 1px solid #D4AF37; /* gold outline */
+    color: #000000;
+    font-weight: 600;
+    font-size: 16px;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: inline-block;
+    position: relative;
+    padding: 10px 22px;
+    border-radius: 999px;
+  }
+  .btn-outline:hover {
+    color: #D4AF37;
+    transform: translateY(-2px);
+    text-shadow: 0 0 6px rgba(212, 175, 55, 0.3);
+    box-shadow: 0 0 10px #D4AF37; /* gold glow */
+  }
+  @media (min-width: 880px) {
+    .products {
+      grid-template-columns: repeat(4, 1fr);
+    }
+  }
+  /* ---------------------------------
+     🌼 Carousel
+  --------------------------------- */
+  .carousel-container {
+    position: relative;
+    overflow: hidden;
+    width: 100%;
+    border: 1px solid #D4AF37; /* gold outline */
+    border-radius: 12px;
+    margin-top: 18px;
+    transition: all 0.3s ease;
+    height: 550px;
+  }
+  .carousel-container:hover {
+    box-shadow: 0 0 10px #D4AF37; /* gold glow on hover */
+  }
+  .carousel-track {
+    display: flex;
+  }
+  .carousel-item {
+    flex: 0 0 auto;
+    width: 100%;
+    position: relative;
+  }
+  .carousel-item img {
+    width: 99.80%;
+    height: 700px;            /* Increased height a bit for better fit on various aspect ratios */
+    object-position: center;  /* Centers the most important part of the image */
+    border-radius: 12px;
+    filter: brightness(0.95);
+  }
+  .caption {
+    position: absolute;
+    bottom: 16px;
+    left: 20px;
+    color: #FFFFFF;
+    background: rgba(0, 0, 0, 0.6);
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 600;
+  }
+  
+  /* ---------------------------------
+     ❓ FAQ Section
+  --------------------------------- */
+  #faq {
+    margin-top: 40px;
+  }
+  .faq-item {
+    margin-bottom: 12px;
+    border: 1px solid #D4AF37; /* gold outline */
+    border-radius: 8px;
+    background: #F5F5DC; /* light beige FAQ */
+    transition: all 0.3s ease;
+    margin-left: 20px;
+    margin-right: 50px;
+  }
+  .faq-item:hover {
+    box-shadow: 0 0 10px #D4AF37; /* gold glow on hover */
+  }
+  .faq-question {
+    width: 100%;
+    text-align: left;
+    background: none;
+    border: none;
+    font-weight: 600;
+    padding: 14px 16px;
+    cursor: pointer;
+    color: #D4AF37; /* gold for important text */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: all 0.3s ease;
+  }
+  .faq-question:hover {
+    color: #000000; /* black hover */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  .faq-question::after {
+    content: "+";
+    font-size: 18px;
+    color: #D4AF37;
+    transition: transform 0.3s ease;
+  }
+  .faq-item.active .faq-question::after {
+    content: "−";
+  }
+  .faq-answer {
+    display: none;
+    padding: 12px 16px;
+    color: #666666; /* muted gray */
+    background: #F5F5DC;
+    font-size: 14px;
+    line-height: 1.5;
+  }
+  .faq-item.active .faq-answer {
+    display: block;
+  }
+  /* ---------------------------------
+     🌙 Footer
+  --------------------------------- */
+  footer {
+    margin-top: 60px;
+    background: #F5F5DC; /* light beige footer */
+    border: 1px solid #D4AF37; /* gold outline */
+    color: #000000;
+    text-align: center;
+    padding: 40px 0;
+    border-top: 1px solid #D4AF37;
+    transition: all 0.3s ease;
+  }
+  footer:hover {
+    box-shadow: 0 0 10px #D4AF37; /* gold glow on hover */
+  }
+  .footer-content {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+  .footer-section {
+    flex: 1;
+    min-width: 200px;
+    margin: 10px;
+  }
+  .footer-section h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #D4AF37;
+  }
+  .footer-section p, .footer-section a {
+    font-size: 14px;
+    line-height: 1.6;
+    display: block;
+    margin-bottom: 8px;
+  }
+  .footer-section a {
+    text-decoration: underline;
+  }
+  .footer-section a:hover {
+    color: #D4AF37;
+  }
+  .footer-bottom {
+    width: 100%;
+    margin-top: 20px;
+    border-top: 1px solid #D4AF37;
+    padding-top: 20px;
+  }
+  .footer-bottom p {
+    font-size: 14px;
+  }
+  footer span {
+    color: #D4AF37; /* gold for important text */
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+  footer span:hover {
+    color: #000000; /* black hover */
+    text-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  footer .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 14px;
+    flex-wrap: wrap;
+  }
+  footer .footer-links a {
+    color: #000000;
+    font-weight: 500;
+    text-decoration: none;
+    font-size: 15px;
+    transition: all 0.3s ease;
+  }
+  footer .footer-links a:hover {
+    color: #D4AF37;
+    transform: translateY(-2px);
+    text-shadow: 0 0 5px rgba(212, 175, 55, 0.3);
+  }
+  /* Promo Banner */
+  .promo-banner {
+    position: relative;
+    text-align: center;
+  }
+  .promo-banner img {
+    width: 100%;
+    height: auto;
+  }
+  .promo-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #FFFFFF;
+  }
+  .promo-text h2 {
+    font-size: 32px;
+    margin-bottom: 10px;
+  }
+  .promo-text p {
+    font-size: 18px;
+    margin-bottom: 20px;
+  }
+  /* Category Grid */
+  .category-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+  }
+  .category-card {
+    background: #F5F5DC;
+    border: 1px solid #D4AF37;
+    border-radius: 12px;
+    text-align: center;
+    padding: 10px;
+    transition: all 0.3s ease;
+  }
+  .category-card:hover {
+    box-shadow: 0 0 10px #D4AF37;
+  }
+  .category-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px;
+  }
+  .category-card p {
+    font-weight: 600;
+    margin: 10px 0;
+  }
+  /* Testimonial Grid */
+  .testimonial-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .testimonial-card {
+    background: #F5F5DC;
+    border: 1px solid #D4AF37;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .testimonial-card:hover {
+    box-shadow: 0 0 10px #D4AF37;
+  }
+  .testimonial-card p:first-child {
+    font-style: italic;
+  }
+  /* Blog Grid */
+  .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .blog-card {
+    background: #F5F5DC;
+    border: 1px solid #D4AF37;
+    border-radius: 12px;
+    transition: all 0.3s ease;
+  }
+  .blog-card:hover {
+    box-shadow: 0 0 10px #D4AF37;
+  }
+  .blog-card img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 12px 12px 0 0;
+  }
+  .blog-card h3 {
+    padding: 10px;
+    font-size: 18px;
+  }
+  .blog-card p {
+    padding: 0 10px 10px;
+  }
+  /* Newsletter */
+  #newsletter {
+    text-align: center;
+  }
+  #newsletter form {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  #newsletter input {
+    padding: 10px;
+    border: 1px solid #D4AF37;
+    border-radius: 999px;
+    width: 300px;
+  }
+  /* Trust Badges */
+  #trust-badges img {
+    height: 50px;
+  }
+  /* Pop-up Ad Modal */
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1001;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+  }
+  .modal-content {
+    background-color: #F5F5DC;
+    margin: 15% auto;
+    padding: 20px;
+    border: 1px solid #D4AF37;
+    width: 80%;
+    max-width: 500px;
+    text-align: center;
+    border-radius: 12px;
+  }
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
+  /* Customer Feedbacks */
+  #customer-feedback {
+    margin-top: 40px;
+  }
+  .feedback-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 20px;
+  }
+  .feedback-card {
+    background: #F5F5DC;
+    border: 1px solid #D4AF37;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    transition: all 0.3s ease;
+  }
+  .feedback-card:hover {
+    box-shadow: 0 0 10px #D4AF37;
+  }
+  .feedback-card p:first-child {
+    font-style: italic;
+  }
+  .rating {
+    color: #D4AF37;
+    font-size: 18px;
+    margin: 5px 0;
+  }
