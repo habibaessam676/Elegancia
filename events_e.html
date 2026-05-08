@@ -1,0 +1,774 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Elégancia — Events & Experiences</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="elegancia.css" rel="stylesheet">
+  <link rel="icon" href="Brand photos/logo.png" type="image/x-icon">
+  <link rel="shortcut icon" href="Brand photos/logo.png">
+  
+  <style>
+    /* Cart modal styles */
+    .icon-linkC { position: relative; display: inline-block; }
+    .cart-badge {
+      position: absolute; top: -8px; right: -8px; background: #D4AF37; color: #000;
+      font-size: 11px; font-weight: bold; width: 18px; height: 18px; border-radius: 50%;
+      display: flex; align-items: center; justify-content: center; pointer-events: none;
+    }
+    .cart-modal {
+      display: none; position: fixed; top: 90px; right: 20px; width: 360px; max-height: 80vh;
+      overflow-y: auto; background: #fff; border: 1px solid #D4AF37; border-radius: 16px;
+      box-shadow: 0 15px 40px rgba(0,0,0,0.2); z-index: 9999; padding: 24px;
+      font-family: 'Inter', sans-serif;
+    }
+    .cart-modal h3 { margin: 0 0 16px; color: #D4AF37; border-bottom: 1px solid #f0e6d2; padding-bottom: 10px; }
+    #cart-total { font-weight: bold; font-size: 1.2rem; margin: 16px 0; padding-top: 12px; border-top: 1px solid #D4AF37; }
+
+    /* Page styles */
+    .page-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 3rem;
+      text-align: center;
+      color: #D4AF37;
+      margin: 40px 0 20px;
+    }
+    .tabs {
+      display: flex;
+      justify-content: center;
+      gap: 40px;
+      margin: 40px 0 60px;
+      border-bottom: 2px solid #f0e6d2;
+      padding-bottom: 20px;
+    }
+    .tab-btn {
+      background: none;
+      border: none;
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: #888;
+      cursor: pointer;
+      padding: 10px 20px;
+      transition: all 0.3s ease;
+    }
+    .tab-btn.active {
+      color: #D4AF37;
+      border-bottom: 4px solid #D4AF37;
+    }
+    .tab-btn:hover { color: #D4AF37; }
+
+    .events-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+      gap: 40px;
+      max-width: 1200px;
+      margin: 0 auto 80px;
+      padding: 0 20px;
+    }
+    .event-card {
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+      border: 1px solid #f0e6d2;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .event-card:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(212,175,55,0.2);
+    }
+    .event-card img {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+    }
+    .event-card .content {
+      padding: 28px;
+    }
+    .event-card h3 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.7rem;
+      margin: 0 0 12px;
+      color: #333;
+    }
+    .event-card .date {
+      font-size: 1.1rem;
+      color: #D4AF37;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+    .event-card p { color: #555; line-height: 1.7; margin-bottom: 16px; }
+    .event-card .locations { font-size: 0.95rem; color: #888; font-style: italic; margin-bottom: 16px; }
+    .event-card .details { font-size: 1rem; color: #444; line-height: 1.8; }
+
+    .schedule-section {
+      background: #faf9f6;
+      padding: 80px 20px;
+      text-align: center;
+    }
+    .schedule-section h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      color: #D4AF37;
+      margin-bottom: 40px;
+    }
+    table {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto 60px;
+      border-collapse: collapse;
+      background: #fff;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    }
+    th, td {
+      padding: 20px;
+      text-align: left;
+      border-bottom: 1px solid #f0e6d2;
+    }
+    th {
+      background: #D4AF37;
+      color: #000;
+      font-weight: 600;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    .booth-section { background: #faf9f6; padding: 100px 20px; }
+
+    .social-icon {
+width: 32px;
+height: 32px;
+transition: all 0.5s ease;
+opacity: 1; /* ← Always fully visible */
+}
+
+.social-icon:hover {
+/* Combined filter: gold tint + stronger glow */
+transform: scale(1.2) translateY(1px); /* Grow and lift up on hover */
+opacity: 1;
+}
+
+/* Search Modal Styles */
+.search-modal {
+  position: fixed;
+  top: -100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  max-width: 700px;
+  background: #ffffff;
+  border-radius: 20px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+  z-index: 10001;
+  transition: top 0.4s ease;
+  max-height: 80vh;
+  overflow: hidden;
+}
+
+.search-modal.open {
+  top: 10vh;
+}
+
+.search-modal-content {
+  padding: 30px;
+}
+
+.search-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
+.search-header h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px;
+  color: #D4AF37;
+  margin: 0;
+}
+
+.close-search-btn {
+  background: none;
+  border: none;
+  font-size: 36px;
+  color: #000;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  line-height: 1;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+}
+
+.close-search-btn:hover {
+  color: #D4AF37;
+}
+
+/* Search Input */
+.search-input-wrapper {
+  position: relative;
+  margin-bottom: 25px;
+}
+
+.search-input-wrapper input {
+  width: 100%;
+  padding: 16px 50px 16px 20px;
+  border: 2px solid #D4AF37;
+  border-radius: 999px;
+  font-size: 16px;
+  font-family: 'Inter', sans-serif;
+  transition: all 0.3s ease;
+}
+
+.search-input-wrapper input:focus {
+  outline: none;
+  border-color: #000;
+  box-shadow: 0 0 0 4px rgba(212, 175, 55, 0.1);
+}
+
+.search-icon {
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  pointer-events: none;
+}
+
+/* Search Results */
+.search-results {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+.search-placeholder {
+  text-align: center;
+  color: #888;
+  padding: 40px 20px;
+  font-size: 15px;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  padding: 15px;
+  border-bottom: 1px solid #f0f0f0;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.search-result-item:hover {
+  background: #faf9f6;
+  transform: translateX(1.5px);
+}
+
+.search-result-img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 8px;
+  border: 1px solid #D4AF37;
+}
+
+.search-result-info {
+  flex: 1;
+}
+
+.search-result-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: #000;
+  margin-bottom: 4px;
+}
+
+.search-result-desc {
+  font-size: 13px;
+  color: #666;
+}
+
+.search-result-price {
+  font-weight: bold;
+  color: #D4AF37;
+  font-size: 16px;
+}
+
+/* Search Overlay */
+.search-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 10000;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.search-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .search-modal {
+    width: 95%;
+    max-width: none;
+  }
+
+  .search-modal.open {
+    top: 5vh;
+  }
+
+  .search-modal-content {
+    padding: 20px;
+  }
+
+  .search-header h2 {
+    font-size: 22px;
+  }
+
+  .filter-chips {
+    justify-content: center;
+  }
+}
+
+
+  </style>
+</head>
+<body>
+  <!-- HEADER -->
+  <header class="site-header">
+    <a class="brand" href="index.html">Elégancia</a>
+    <div class="header-inner">
+      <a class="icon-linkS" href="search_e.html"><img src="search.png" alt="Search"></a>
+      <a class="icon-linkC" id="cart-icon" href="">
+        <img src="cart.png" alt="Cart">
+        <span class="cart-badge" id="cart-badge">0</span>
+      </a>
+      <a class="icon-linkP" href="profile_e.html"><img src="profile.png" alt="Profile"></a>
+    </div>
+  </header>
+
+  <!-- PAGE TITLE -->
+  <h1 class="page-title">Events & Experiences</h1>
+
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="showTab('upcoming')">Upcoming Events</button>
+    <button class="tab-btn" onclick="showTab('past')">Past Events</button>
+  </div>
+
+  <!-- UPCOMING EVENTS -->
+  <div id="upcoming" class="tab-content">
+    <div class="events-grid">
+      <div class="event-card">
+        <img src="https://assets.vogue.com/photos/682b875c6d1026c0136a4edb/master/w_1600%2Cc_limit/REVLON-VOGUEB-19525-INLINE-1.jpg" alt="Fashion runway with scents">
+        <div class="content">
+          <h3>Elégancia x Fashion Designers Collaboration</h3>
+          <div class="date">December 25 – 27, 2025</div>
+          <p>A captivating mini runway show linking stunning outfits to matching scent families.</p>
+          <div class="locations">Mall of Arabia • Galleria40 • Walk of Cairo</div>
+          <div class="details">Witness fashion and fragrance unite on the runway. Interactive sessions, live music, exclusive previews, and special discounts.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://media.licdn.com/dms/image/v2/D5610AQHAGx65z4aWXQ/image-shrink_800/B56ZpfNlqIJkAc-/0/1762533989572?e=2147483647&v=beta&t=ogJpMatfrGcA5XVRbginaMnYFPf2Kd-W3g36VDEkchI" alt="Fragrance challenge booth">
+        <div class="content">
+          <h3>Guess the Fragrance Challenge Booth</h3>
+          <div class="date">January 5, 2026</div>
+          <p>Exciting blind smell challenges with rewards.</p>
+          <div class="locations">AUC • GUC • BUE • MSA • MUST</div>
+          <div class="details">Test your senses, win samples or full bottles, QR quizzes, group fun!</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://perfumeevent.com/cdn/shop/files/GEE20515_websize.jpg?v=1733271981&width=1500" alt="Scent tasting bar">
+        <div class="content">
+          <h3>Scent Tasting Bar</h3>
+          <div class="date">February 1, 2026</div>
+          <p>Elegant fragrance tasting with droppers and guidance.</p>
+          <div class="locations">Galleria40 • Garden 8 • CFC • Almaza</div>
+          <div class="details">Mix notes, digital quizzes, treats, and luxury raffles.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://cached.imagescaler.hbpl.co.uk/resize/scaleWidth/743/cached.offlinehbpl.hbpl.co.uk/news/OMC/cK-20160923100130214.jpg" alt="Golden scent tunnel">
+        <div class="content">
+          <h3>The Elégancia Golden Tunnel</h3>
+          <div class="date">February 15, 2026</div>
+          <p>Mesmerizing walkthrough with layered scents.</p>
+          <div class="details">Immersive golden-lit journey – perfect for photos and discovery.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- UPCOMING SCHEDULE -->
+    <section class="schedule-section">
+      <h2>Upcoming Event Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Elégancia x Fashion Designers Collaboration</td>
+            <td>December 25 – 27, 2025</td>
+            <td>Mall of Arabia, Galleria40, Walk of Cairo</td>
+          </tr>
+          <tr>
+            <td>Guess the Fragrance Challenge Booth</td>
+            <td>January 5, 2026</td>
+            <td>AUC, GUC, BUE, MSA, MUST</td>
+          </tr>
+          <tr>
+            <td>Scent Tasting Bar</td>
+            <td>February 1, 2026</td>
+            <td>Galleria40, Garden 8, CFC, Almaza</td>
+          </tr>
+          <tr>
+            <td>The Elégancia Golden Tunnel</td>
+            <td>February 15, 2026</td>
+            <td>Various malls</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- PAST EVENTS -->
+  <div id="past" class="tab-content" style="display:none;">
+    <div class="events-grid">
+      <div class="event-card">
+        <img src="https://media.vanityfair.com/photos/667f879dffe089e310af811e/16:9/w_6000,h_3375,c_limit/Amaffi_44E57_pho_008_src.jpg" alt="Secret scent room">
+        <div class="content">
+          <h3>The Elégancia Secret Scent Room</h3>
+          <div class="date">November 15, 2025</div>
+          <p>Mysterious golden room with blind testing.</p>
+          <div class="locations">Arkan • Garden 8 • Four Seasons • Nile Ritz</div>
+          <div class="details">Enchanted discovery with dramatic reveals and photo moments.</div>
+        </div>
+      </div>
+
+      <div class="event-card">
+        <img src="https://djx5h8pabpett.cloudfront.net/wp-content/uploads/sites/4/2025/11/%EC%82%AC%EC%A7%84%EC%9E%90%EB%A3%8C2-%EB%A1%AF%EB%8D%B0%EB%A9%B4%EC%84%B8%EC%A0%90-%EB%AA%A8%EC%97%A3-%ED%97%A4%EB%84%A4%EC%8B%9C%EC%99%80%E2%80%98%ED%94%84%EB%A0%8C%EC%B9%98-%EB%9F%AD%EC%85%94%EB%A6%AC%EC%9D%98-%EC%A0%95%EC%88%98%EC%84%A0%EB%B3%B4%EC%97%AC-1600x1067.jpg" alt="Gala night">
+        <div class="content">
+          <h3>Find Your Scent Identity Gala Night</h3>
+          <div class="date">December 1, 2025</div>
+          <p>Black & gold cocktail soirée.</p>
+          <div class="details">Sophisticated ambiance, expert consultants, live music.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAST SCHEDULE -->
+    <section class="schedule-section">
+      <h2>Past Event Schedule</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Event</th>
+            <th>Date</th>
+            <th>Location</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>The Elégancia Secret Scent Room</td>
+            <td>November 15, 2025</td>
+            <td>Arkan, Garden 8, Four Seasons, Nile Ritz</td>
+          </tr>
+          <tr>
+            <td>Find Your Scent Identity Gala Night</td>
+            <td>December 1, 2025</td>
+            <td>Luxury hotels & malls</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+  </div>
+
+  <!-- BOOTH CONCEPTS -->
+  <section class="booth-section">
+    <h2 style="text-align:center; padding-top:40px; font-family:'Playfair Display',serif; font-size:2.5rem; color:#D4AF37; margin: 30px;">Our Booth Concepts</h2>
+    <div class="events-grid">
+      <div class="event-card">
+        <img src="https://penbodisplay.com/wp-content/uploads/2025/03/custom-perfume-store-fixtures2-600x400.jpeg" alt="Golden Shelf">
+        <div class="content">
+          <h3>The Golden Shelf</h3>
+          <p>Tall golden shelving with spotlighted scent categories for an opulent browsing experience.</p>
+        </div>
+      </div>
+      <div class="event-card">
+        <img src="https://media.gettyimages.com/id/1483329057/photo/woman-preparing-aromatic-liquid-for-diffuser-the-process-of-creating-perfume-workshop.jpg?s=612x612&w=gi&k=20&c=sDnIZJ9a3WAMpURoDcUwHrbQoM_2Vpkppmlhi457ahw=" alt="Testing Lab">
+        <div class="content">
+          <h3>The Testing Lab</h3>
+          <p>Luxury scientific-style booth with droppers and premium ingredient shelves.</p>
+        </div>
+      </div>
+      <div class="event-card">
+        <img src="https://rtdisplay.com/wp-content/uploads/2025/06/perfdme2.jpg" alt="Black & Gold Minimal Cube">
+        <div class="content">
+          <h3>Black & Gold Minimal Cube</h3>
+          <p>Matte black cube with gold lighting and tasting bar.</p>
+        </div>
+      </div>
+      <div class="event-card">
+        <img src="https://framerusercontent.com/images/L5Q8T11HRB8fDq6QIccOmoGWFwI.jpg?width=2048&height=1365" alt="Scent Tunnel">
+        <div class="content">
+          <h3>The Scent Tunnel</h3>
+          <p>Immersive tunnel with different scent zones.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CART MODAL -->
+  <div class="cart-modal" id="cart-modal">
+    <h3>Your Cart</h3>
+    <div id="cart-items">
+      <p style="text-align:center;color:#888;padding:20px 0;">Your cart is empty</p>
+    </div>
+    <button id="cart-close-btn" style="position:absolute; top:12px; right:16px; background:none; border:none; font-size:28px; cursor:pointer; color:#333; line-height:1;">
+      ×
+    </button>
+    <div id="cart-total">Total: $0</div>
+  </div>
+
+  <div class="search-modal" id="search-modal">
+    <div class="search-modal-content">
+      <div class="search-header">
+        <h2>Search Products</h2>
+        <button id="close-search-btn" class="close-search-btn">&times;</button>
+      </div>
+      
+      <div class="search-input-wrapper">
+        <input 
+          type="text" 
+          id="search-input" 
+          placeholder="Search products, pages, help, and more..." 
+          autocomplete="off"
+        >
+        <span class="search-icon">🔍</span>
+      </div>
+  
+      <div class="search-results" id="search-results">
+        <p class="search-placeholder">Start typing to search...</p>
+      </div>
+      </div>
+  </div>
+  
+  <!-- Search Overlay -->
+  <div class="search-overlay" id="search-overlay"></div>
+
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section company-info">
+        <h3>Elégancia</h3>
+        <p>Discover your perfect scent with personalized matching. Luxury perfumes delivered effortlessly.</p>
+        <p>Headquartered in Cairo, Egypt | Est. 2023</p>
+      </div>
+      <div class="footer-section links">
+        <h3>About Us</h3>
+        <a href="about_e.html">About Us</a>
+        <a href="blogs_e.html">Blogs</a>
+        <a href="partners_e.html">Partners</a>
+      </div>
+      <div class="footer-section support">
+        <h3>Support</h3>
+        <a href="contact_e.html">Contact Us</a>
+        <a href="help_e.html">Help Center</a>
+        <a href="issue_e.html">Report Issues</a>
+      </div>
+      <div class="footer-section legal">
+        <h3>Legal</h3>
+        <a href="privacy_e.html">Privacy Policy</a>
+        <a href="terms_e.html">Terms of Service</a>
+        <a href="returns_e.html">Returns & Exchanges</a>
+      </div>
+      <div class="footer-bottom">
+        <div class="footer-section social">
+          <h3>Follow Us</h3>
+          <div class="social-icons" style="display:flex; justify-content:center; gap:20px; margin-top:12px;">
+            <a href="https://www.instagram.com/elegancia.egy?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram">
+              <img src="instagram.png" alt="Instagram" class="social-icon">
+            </a>
+            <a href="#" target="_blank" aria-label="TikTok">
+              <img src="tiktok.png" alt="TikTok" class="social-icon">
+            </a>
+            <a href="#" target="_blank" aria-label="Facebook">
+              <img src="facebook.png" alt="Facebook" class="social-icon">
+            </a>
+            <a href="mailto:contact@elegancia.com" aria-label="Email">
+              <img src="email.png" alt="Email" class="social-icon">
+            </a>
+          </div>
+        </div>  
+        <p>© <span id="year">2025</span> Elégancia. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script>
+    function showTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.style.display = 'none');
+      document.getElementById(tabId).style.display = 'block';
+      document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+      event.target.classList.add('active');
+    }
+
+    function initEleganciaCart() {
+      const CART_KEY = 'elegancia_cart';
+      const cartIcon = document.getElementById('cart-icon');
+      const cartModal = document.getElementById('cart-modal');
+      const cartItemsContainer = document.getElementById('cart-items');
+      const cartTotalEl = document.getElementById('cart-total');
+      const cartBadge = document.getElementById('cart-badge');
+      const closeBtn = document.getElementById('cart-close-btn');
+    
+      function getCart() {
+        return JSON.parse(localStorage.getItem(CART_KEY) || '[]');
+      }
+    
+      function saveCart(cart) {
+        localStorage.setItem(CART_KEY, JSON.stringify(cart));
+        updateBadge();
+        renderCart();
+      }
+    
+      function updateBadge() {
+        const totalItems = getCart().reduce((sum, item) => sum + item.qty, 0);
+        if (cartBadge) {
+          cartBadge.textContent = totalItems;
+          cartBadge.style.display = totalItems > 0 ? 'flex' : 'none';
+        }
+      }
+    
+      window.addToCart = function(name, price = 0) {
+        const cart = getCart();
+        const existing = cart.find(item => item.name === name);
+        if (existing) existing.qty += 1;
+        else cart.push({ name, price, qty: 1 });
+        saveCart(cart);
+        alert(`${name} added to cart!`);
+      };
+    
+      window.changeQty = function(name, price, delta) {
+        let cart = getCart();
+        const item = cart.find(i => i.name === name);
+        if (item) {
+          item.qty += delta;
+          if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+        }
+        saveCart(cart);
+      };
+    
+      function renderCart() {
+        if (!cartItemsContainer || !cartTotalEl) return;
+    
+        const cart = getCart();
+        let totalPrice = 0;
+    
+        cartItemsContainer.innerHTML = '';
+    
+        if (cart.length === 0) {
+          cartItemsContainer.innerHTML = `<p style="text-align:center;color:#888;padding:40px 0;">Your cart is empty</p>`;
+          cartTotalEl.textContent = 'Total: $0';
+    
+          const actions = cartModal.querySelector('#cart-footer-actions');
+          if (actions) actions.remove();
+    
+          return;
+        }
+    
+        cart.forEach(item => {
+          totalPrice += item.price * item.qty;
+    
+          const itemHTML = `
+            <div style="display:flex; justify-content:space-between; align-items:center; padding:14px 0; border-bottom:1px solid #eee;">
+              <div style="flex:1;">
+                <strong>${item.name}</strong><br>
+                <small>$${item.price} × ${item.qty}</small>
+              </div>
+              <div style="display:flex; gap:8px; align-items:center;">
+                <button onclick="changeQty('${item.name}', ${item.price}, -1)"
+                        style="width:34px;height:34px;border:none;border-radius:50%;background:#000;color:#D4AF37;font-weight:bold;cursor:pointer;">−</button>
+                <span style="min-width:30px;text-align:center;font-weight:600;">${item.qty}</span>
+                <button onclick="changeQty('${item.name}', ${item.price}, 1)"
+                        style="width:34px;height:34px;border:none;border-radius:50%;background:#D4AF37;color:#fff;font-weight:bold;cursor:pointer;">+</button>
+              </div>
+            </div>`;
+          cartItemsContainer.insertAdjacentHTML('beforeend', itemHTML);
+        });
+    
+        cartTotalEl.textContent = `Total: $${totalPrice.toFixed(2)}`;
+    
+        let footerActions = cartModal.querySelector('#cart-footer-actions');
+        if (!footerActions) {
+          footerActions = document.createElement('div');
+          footerActions.id = 'cart-footer-actions';
+          footerActions.style.cssText = 'margin-top:24px; text-align:center; padding-top:16px; border-top:1px solid #eee;';
+          footerActions.innerHTML = `
+  <a href="product_e.html" id="continue-shopping-btn"
+     style="display:inline-block; background:#D4AF37; color:#000; padding:14px 32px; border-radius:999px; font-weight:600; text-decoration:none; transition:all 0.3s ease; cursor:pointer;">
+     Continue Shopping →
+  </a>
+`; 
+         cartModal.appendChild(footerActions);
+        }
+      }
+    
+      function openCart() {
+        cartModal.style.display = 'block';
+        renderCart();
+      }
+    
+      function closeCart() {
+        cartModal.style.display = 'none';
+      }
+    
+      function toggleCart(e) {
+        if (e) e.preventDefault();
+        if (cartModal.style.display === 'block') closeCart();
+        else openCart();
+      }
+    
+      if (cartIcon) cartIcon.addEventListener('click', toggleCart);
+      if (closeBtn) closeBtn.addEventListener('click', closeCart);
+    
+      document.addEventListener('click', (e) => {
+        if (cartModal.style.display === 'block' && !cartModal.contains(e.target) && e.target !== cartIcon) {
+          closeCart();
+        }
+      });
+    
+      cartModal.addEventListener('click', (e) => {
+        e.stopPropagation();
+      });
+    
+      updateBadge();
+      renderCart();
+    }
+    
+    document.addEventListener('DOMContentLoaded', initEleganciaCart);
+  </script>
+  <script src="cart.js"></script>
+  <script src="elegancia.js"></script>
+</body>
+</html>
